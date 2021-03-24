@@ -11,7 +11,7 @@ let stack = {
 	},
 	getElement() {
 		let elem = this.elements.pop();
-		this.currentItem-= 1;
+		this.currentItem -= 1;
 		return elem;
 	}
 };
