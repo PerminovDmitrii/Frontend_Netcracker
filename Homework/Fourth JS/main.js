@@ -46,6 +46,6 @@ function getElement(stack) {
 		stack.currentItem = 0;
 		document.getElementById('output-field').innerHTML = "";
 		alert('Stack empty!');
-        console.log(err);
+        	console.log(err);
     }
 }
