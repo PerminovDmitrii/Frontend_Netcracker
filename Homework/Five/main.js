@@ -1,26 +1,40 @@
 function mainFunc() {
     let parent = document.getElementById('entry-field__parent').value;
-    if (tagValidation(parent, 'parent') == 'error') {
-        return;
-    }
     let elem = document.getElementById('entry-field__child').value;
     let quantity = +document.getElementById('entry-field__quantity').value;
-    
-    if ( quantityValidation(quantity) ) {
-        return;
-    }
     incertHtmlElement(parent)(elem)(quantity);
 }
 
 function incertHtmlElement(parent) {
+    if (tagValidation(parent, 'parent') == false) {
+        return;
+    }
+    
+    let parentElement = getParentHtmlElement(parent);
+    
+    if (firsParentTagValidation(parentElement, parent) == false) {
+        return;
+    }
+            
+    if (parentValueValidation(parentElement) == false) {
+        alert('Maximum nesting reached!');
+        return;
+    }
+    
     return (elem) => {
+        
+        if (tagValidation(elem, 'child') == false) {
+            return;
+        }
+        
         return (quantity) => {
-            let parentElement = getParentHtmlElement(parent);
+            
+            if (quantityValidation(quantity) == false) {
+                return;
+            }
+            
             for (let i = 0; i < quantity; i++) {
                 let newElement = createHtmlElement(elem);
-                if (newElement == 'error') {
-                    return;
-                }
                 let deleteButton = createDeleteButton();
                 newElement.appendChild(deleteButton);
                 parentElement.appendChild(newElement);
@@ -38,11 +52,9 @@ function createDeleteButton() {
 }
 
 function createHtmlElement(elem) {
-    if (tagValidation(elem, 'child') == false) {
-        return 'error';
-    }
     let newElement = document.createElement(elem);
     newElement.className = 'main-element__new-element';
+    newElement.textContent = elem;
     return newElement;
 }
 
@@ -65,11 +77,13 @@ function tagValidation(tag, typeOfElement) {
         if (testElement instanceof HTMLUnknownElement) {
             alert(`Incorrect value in the ${typeOfElement} field!`);
             return false;
-        } else {
-            return true;
         }
-    } catch (error) {
-        alert (`The ${typeOfElement} field is empty!`);
+    } catch(error) {
+        if (tag == '') {
+            alert (`The ${typeOfElement} field is empty!`);
+        } else {
+            alert(`Incorrect value in the ${typeOfElement} field!`);
+        }
     }
 }
 
@@ -83,8 +97,31 @@ function quantityValidation(quantity) {
     }
 }
 
+function parentValueValidation(parent) {
+    let nestingCount = 0;
+    while (parent.tagName != 'SECTION') {
+        parent = parent.parentElement;
+        nestingCount++;
+    }
+    if (nestingCount == 6) {
+        return false;
+    }
+}
+
+function firsParentTagValidation(parent, parentName) {
+    try {
+        if (parent.parentElement.tagName == 'SECTION' && parentName != 'div') {
+            alert('The first parent should always be "div"!');
+            return false;
+        }
+    } catch(error) {
+        alert('The first parent should always be "div"!');
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     alert("Main element: div - it is specified by default in the form.\n" +
         "Each new element is added to the half-last parent with the specified tag.\n" +
-        "The maximum number of added elements at a time: 5.");
+        "The maximum number of added elements at a time: 5.\n" +
+        "Maximum nesting of elements: 5.");
 });
