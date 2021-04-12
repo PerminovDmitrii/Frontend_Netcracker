@@ -2,10 +2,10 @@ function mainFunc() {
     let parent = document.getElementById('entry-field__parent').value;
     let elem = document.getElementById('entry-field__child').value;
     let quantity = +document.getElementById('entry-field__quantity').value;
-    incertHtmlElement(parent)(elem)(quantity);
+    insertHtmlElement(parent)(elem)(quantity);
 }
 
-function incertHtmlElement(parent) {
+function insertHtmlElement(parent) {
     if (tagValidation(parent, 'parent') == false) {
         return;
     }
@@ -115,7 +115,13 @@ function firsParentTagValidation(parent, parentName) {
             return false;
         }
     } catch(error) {
-        alert('The first parent should always be "div"!');
+        let mainElement = document.getElementsByClassName('main-element');
+        let childNodes = mainElement[0].childNodes;
+        if (childNodes.length == 0) {
+            alert('The first parent should always be "div"!');
+        } else {
+            alert('The specified parent does not exist!');
+        }
     }
 }
 
