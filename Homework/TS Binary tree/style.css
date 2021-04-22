@@ -1,0 +1,94 @@
+html {
+    font-family: sans-serif;
+}
+
+body {
+	margin: 0;
+}
+
+header {
+	background: #54d0ff;
+	height: 100px;
+}
+
+h1 {
+	color: #a80900;
+	text-align: center;
+	line-height: 100px;
+	margin: 0;
+}
+
+section {
+	padding: 10px;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	vertical-align: middle;
+}
+
+section:nth-of-type(2) {
+    flex: 1 auto;
+}
+
+.controls-panel {
+    border: 4px groove #233eff;
+	padding: 10px;
+    flex: 1 25px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+}
+
+.controls-panel__add-node {
+    padding: 2px;
+    margin-left: 10px;
+    flex: 1 25px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+}
+
+.controls-panel__extracting-node {
+    padding: 2px;
+    margin-left: 10px;
+    flex: 1 25px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+}
+
+.controls-panel__delete-node {
+    padding: 2px;
+    margin-left: 10px;
+    flex: 1 25px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+}
+
+.controls-panel__whole-tree-operations {
+    padding: 2px;
+    margin-left: 10px;
+    flex: 1 25px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+}
+
+#output-field__ext-key {
+    padding: 2px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin: 0;
+    font: 400 14px Arial;
+}
+
+button {
+    padding: 2px;
+    margin-left: 10px;
+}
+
+input {
+    padding: 2px;
+    margin-left: 10px;
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Binary tree</title>
+		<link rel="stylesheet" href="style.css" type="text/css">
+		<script src="./dist/bundle.js"></script>
+	</head>
+	<body>
+		<header class="header">
+			<h1>Binary tree</h1>
+		</header>
+		<section>
+			<article class="controls-panel">
+				<div class="controls-panel__add-node">
+					<button class="controls-panel__add-node__add-button" id="add-button" onclick="addNode()">Add node</button>
+					<input class="controls-panel__add-node__entry-field" id="entry-field__key" type="text" placeholder="Enter key">
+					<input class="controls-panel__add-node__entry-field" id="entry-field__data" type="text" placeholder="Enter data">
+				</div>
+                <div class="controls-panel__extracting-node">
+					<button class="controls-panel__extracting-node__extracting-button" id="extracting-button" onclick="extractingNode()">Extract a node by key</button>
+					<input class="controls-panel__extracting-node__entry-field" id="entry-field__ext-key" type="text" placeholder="Enter key">
+					<p class="controls-panel__extracting-node__output-field" id="output-field__ext-key"></p>
+				</div>
+				<div class="controls-panel__delete-node">
+					<button class="controls-panel__delete-node__delete-button" id="delete-button" onclick="deleteNode()">Delete a node by key</button>
+					<input class="controls-panel__delete-node__entry-field" id="entry-field__delete-key" type="text" placeholder="Enter key">
+				</div>
+				<div class="controls-panel__whole-tree-operations">
+					<button class="controls-panel__whole-tree-operations__output-button" id="output-button" onclick="outputTree()">Bring out the whole tree</button>
+					<button class="controls-panel__whole-tree-operations__clear-button" id="clear-button" onclick="clearTree()">Clear tree</button>
+				</div>
+			</article>
+			<canvas id="canvas-output" style="display: block;"></canvas>
+		</section>
+	</body>
+</html>
