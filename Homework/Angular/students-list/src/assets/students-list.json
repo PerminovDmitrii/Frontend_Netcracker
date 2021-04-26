@@ -1,0 +1,72 @@
+[ 
+    {
+        "lastName": "Смирнова",
+        "firstName": "Светлана",
+        "midName": "Ивановна",
+        "birthDate": "2003-03-24",
+        "averageScore": "4"
+    },
+    {
+        "lastName": "Баранов",
+        "firstName": "Иван",
+        "midName": "Андреевич",
+        "birthDate": "2002-08-27",
+        "averageScore": "3"
+    },
+    {
+        "lastName": "Давыдов",
+        "firstName":"Александр",
+        "midName": "Маркович",
+        "birthDate": "2002-03-24",
+        "averageScore": "5"
+    },
+    {
+        "lastName": "Дементьева",
+        "firstName":"Полина",
+        "midName": "Андреевна",
+        "birthDate": "2003-03-28",
+        "averageScore": "4"
+    },
+    {
+        "lastName": "Иванов",
+        "firstName":"Артём",
+        "midName": "Михайлович",
+        "birthDate": "2002-07-31",
+        "averageScore": "4"
+    },
+    {
+        "lastName": "Павлова",
+        "firstName":"Анна",
+        "midName": "Романовна",
+        "birthDate": "2003-04-01",
+        "averageScore": "5"
+    },
+    {
+        "lastName": "Медведев",
+        "firstName":"Михаил",
+        "midName": "Романович",
+        "birthDate": "2003-03-20",
+        "averageScore": "3"
+    },
+    {
+        "lastName": "Никифоров",
+        "firstName":"Владислав",
+        "midName": "Ильич",
+        "birthDate": "2002-01-22",
+        "averageScore": "5"
+    },
+    {
+        "lastName": "Маркова",
+        "firstName":"Елизавета",
+        "midName": "Васильевна",
+        "birthDate": "2003-11-17",
+        "averageScore": "4"
+    },
+    {
+        "lastName": "Гришина",
+        "firstName":"Дарья",
+        "midName": "Дмитриевна",
+        "birthDate": "2002-11-21",
+        "averageScore": "5"
+    }
+]

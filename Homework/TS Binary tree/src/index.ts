@@ -47,7 +47,8 @@ function addNode(): void {
         return;
     }
 
-    binaryTree.addNode(key, data);
+    binaryTree.addNode(key, data, drawHelper.spreadByDepth);
+    drawHelper.drawTree(binaryTree.root);
     (document.getElementById("entry-field__data") as HTMLInputElement).value = "";
     (document.getElementById(ADD_KEY_ID) as HTMLInputElement).value = "";
 }
@@ -86,6 +87,8 @@ function deleteNode(): void {
     }
 
     binaryTree.removeHelper(key, binaryTree.root);
+    drawHelper.drawTree(binaryTree.root);
+    binaryTree.travelModifTree(binaryTree.root);
     (document.getElementById(DEL_KEY_ID) as HTMLInputElement).value = "";
 }
 

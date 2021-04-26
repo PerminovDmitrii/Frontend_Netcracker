@@ -1,0 +1,83 @@
+html {
+    font-family: sans-serif;
+}
+
+body {
+	margin: 0;
+}
+
+header {
+	background: #54d0ff;
+	height: 100px;
+}
+
+.main {
+    padding: 10px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.table {
+    flex: 1;
+    padding: 10px;
+    margin: auto;
+}
+
+table {
+    border-spacing: 0px;
+
+    td, th {
+        padding: 5px;
+        text-align: center;
+        border: solid 1px black;
+    }
+
+    .scoreThree {
+        background-color: rgb(253, 143, 143);
+    }
+
+    .averageHighlight {
+        background-color: rgb(2, 182, 253);
+    }
+}
+
+.control-panel {
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    vertical-align: middle;
+    align-items: center;
+    align-content: center;
+
+    .highlight-average-three {
+        flex: 1;
+        padding: 10px;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        vertical-align: middle;
+        height: 150px;
+    }
+
+    .filter-by {
+        flex: 1;
+        padding: 10px;
+        display: block;
+        flex-flow: row nowrap;
+        justify-content: center;
+        margin: auto;
+    }
+
+    .highlight-by {
+        flex: 1;
+        padding: 10px;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        vertical-align: middle;
+    }
+}

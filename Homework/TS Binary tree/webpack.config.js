@@ -1,4 +1,5 @@
 const path = require('path');
+const TSLintPlugin = require('tslint-webpack-plugin');
 
 module.exports = {
   entry: './src/index.ts',
@@ -19,4 +20,9 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  plugins: [
+    new TSLintPlugin({
+      files: ['./src/**/*.ts']
+    })
+  ],
 };

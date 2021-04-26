@@ -1,23 +1,20 @@
 import TreeNode from "./tree-node";
 
 
+
 export default class DrawHelper {
 
-    private spreadByDepth: number;
-    private xPosFirsrNode: number;
-    private yPosArr: number[];
+    public spreadByDepth: number;
 
     constructor () {
         this.spreadByDepth = 250;
-        this.xPosFirsrNode = window.innerWidth / 2 - 60;
-        this.yPosArr = [80, 160, 240, 320, 400];
     }
 
     public drawTree(root: TreeNode<string>): void {
         const tempPosArray: number[] = [];
         let posArray: number[] = [];
-        posArray = this.createPosArray(this.xPosFirsrNode, this.yPosArr, root, tempPosArray, this.spreadByDepth);
-
+        posArray = this.createPosArray(root, tempPosArray);
+        console.log(posArray);
         const canvas = <HTMLCanvasElement> document.getElementById("canvas-output");
         const ctx = canvas.getContext("2d");
         canvas.width = window.innerWidth;
@@ -35,11 +32,11 @@ export default class DrawHelper {
         }
     }
 
-    private createPosArray(width: number, yPosArr: number[], root: TreeNode<string>, posArray: number[], spreadByDepth: number): number[] {
+    private createPosArray(root: TreeNode<string>, posArray: number[]): number[] {
         if (root !== null) {
-            posArray.push(root.key, width, yPosArr[root.depthLevel]);
-            this.createPosArray(width - spreadByDepth, yPosArr, root.leftChild, posArray, spreadByDepth / 2);
-            this.createPosArray(width + spreadByDepth, yPosArr, root.rightChild, posArray, spreadByDepth / 2);
+            posArray.push(root.key, root.xPos, root.yPos);
+            this.createPosArray(root.leftChild, posArray);
+            this.createPosArray(root.rightChild, posArray);
         }
         return posArray;
     }

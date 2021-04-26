@@ -8,25 +8,43 @@ export default class BinaryTree {
         this.root = null;
     }
 
-    public addNode(key: number, data: string): void {
+    public addNode(key: number, data: string, spreadByDepth: number): void {
         const newNode: TreeNode<string> = new TreeNode(data, key);
         if (this.root === null) {
             this.root = newNode;
         } else {
-            this.recurceAddNode(newNode, this.root);
+            this.recurceAddNode(newNode, this.root, spreadByDepth);
         }
     }
 
-    private recurceAddNode(newNode: TreeNode<string>, root: TreeNode<string>): void {
+    private recurceAddNode(newNode: TreeNode<string>, root: TreeNode<string>, spreadByDepth: number): void {
         newNode.depthLevel++;
         if (newNode.depthLevel > 4) {
             alert("Maximum tree depth reached!");
             return;
         }
         if (newNode.key < root.key) {
-            root.leftChild === null ? root.leftChild = newNode : this.recurceAddNode(newNode, root.leftChild);
+            if (root.leftChild === null) {
+                newNode.xPos = newNode.xPos - spreadByDepth;
+                newNode.yPos = newNode.yPos + 80;
+                root.leftChild = newNode;
+            } else {
+                newNode.xPos -= spreadByDepth;
+                newNode.yPos += 80;
+                spreadByDepth = spreadByDepth / 2;
+                this.recurceAddNode(newNode, root.leftChild, spreadByDepth);
+            }
         } else if (newNode.key > root.key) {
-            root.rightChild === null ? root.rightChild = newNode : this.recurceAddNode(newNode, root.rightChild);
+             if (root.rightChild === null) {
+                newNode.xPos += spreadByDepth;
+                newNode.yPos += 80;
+                root.rightChild = newNode;
+                } else {
+                    newNode.xPos += spreadByDepth;
+                    newNode.yPos += 80;
+                    spreadByDepth = spreadByDepth / 2;
+                    this.recurceAddNode(newNode, root.rightChild, spreadByDepth);
+                }
         } else {
             alert("Such a key already exists!");
             return;
@@ -41,6 +59,7 @@ export default class BinaryTree {
         if (root === null) {
             return null;
         }
+
         if (key < root.key) {
             root.leftChild = this.removeNode(root.leftChild, key);
             return root;
@@ -54,17 +73,34 @@ export default class BinaryTree {
             return root;
         }
         if (root.leftChild === null) {
+            root.rightChild.xPos = root.xPos;
+            root.rightChild.yPos = root.yPos;
+            root.rightChild.depthLevel = root.depthLevel;
+            const tempNode = root.rightChild.rightChild;
             root = root.rightChild;
+            root.rightChild = tempNode;
             return root;
         }
         if (root.rightChild === null) {
+            root.leftChild.xPos = root.xPos;
+            root.leftChild.yPos = root.yPos;
+            root.leftChild.depthLevel = root.depthLevel;
+            const tempNode = root.leftChild.leftChild;
             root = root.leftChild;
+            root.leftChild = tempNode;
             return root;
         }
 
-        const newNode = this.searchMinNode(root.rightChild);
-        root.key = newNode.key;
-        root.rightChild = this.removeNode(root.rightChild, newNode.key);
+        let newNode = this.searchMinNode(root.rightChild);
+        newNode.xPos = root.xPos;
+        newNode.yPos = root.yPos;
+        newNode.depthLevel = root.depthLevel;
+        const rightChild = root.rightChild;
+        const leftChild = root.rightChild;
+        root = newNode;
+        root.rightChild = rightChild;
+        root.leftChild = leftChild;
+        newNode = null;
         return root;
 
     }
@@ -97,6 +133,21 @@ export default class BinaryTree {
         if (binaryTree.root === null) {
             alert("The tree is not initialized!");
             return null;
+        }
+    }
+
+    public travelModifTree(root: TreeNode<string>): void {
+        if (root.leftChild !== null) {
+            root.leftChild.depthLevel = root.depthLevel + 1;
+            root.leftChild.xPos = root.xPos - 80;
+            root.leftChild.yPos = (root.depthLevel + 2) * 80;
+            this.travelModifTree(root.leftChild);
+        }
+        if (root.rightChild !== null) {
+            root.rightChild.depthLevel = root.depthLevel + 1;
+            root.rightChild.xPos = root.xPos + 80;
+            root.rightChild.yPos = (root.depthLevel + 2) * 80;
+            this.travelModifTree(root.rightChild);
         }
     }
 }
