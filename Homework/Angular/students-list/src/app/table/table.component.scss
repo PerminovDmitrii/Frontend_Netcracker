@@ -6,26 +6,18 @@ body {
 	margin: 0;
 }
 
-header {
-	background: #54d0ff;
-	height: 100px;
-}
-
 .main {
     padding: 10px;
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: row nowrap;
     justify-content: center;
     vertical-align: middle;
 }
 
 .table {
-    flex: 1;
+    flex: 1 545px;
     padding: 10px;
-    margin: auto;
-}
-
-table {
+    margin-right: 20px;
     border-spacing: 0px;
 
     td, th {
@@ -37,6 +29,9 @@ table {
     .scoreThree {
         background-color: rgb(253, 143, 143);
     }
+    .scoreThree:last-child {
+        background-color: white;
+    }
 
     .averageHighlight {
         background-color: rgb(2, 182, 253);
@@ -44,40 +39,61 @@ table {
 }
 
 .control-panel {
-    flex: 1;
+    flex: 1 400px;
     padding: 10px;
-    display: flex;
+    display: block;
     flex-flow: column nowrap;
-    justify-content: center;
-    vertical-align: middle;
-    align-items: center;
-    align-content: center;
+    justify-content: space-around;
+    align-content: flex-start;
 
     .highlight-average-three {
-        flex: 1;
         padding: 10px;
         display: flex;
-        flex-flow: row nowrap;
-        justify-content: center;
+        margin-bottom: 20px;
+        padding: 0;
         vertical-align: middle;
-        height: 150px;
     }
 
     .filter-by {
-        flex: 1;
         padding: 10px;
-        display: block;
-        flex-flow: row nowrap;
-        justify-content: center;
-        margin: auto;
+        margin-bottom: 20px;
+        padding: 0;
+
+        .filter-input {
+            padding: 0;
+            margin: 5px;
+            width: 40px;
+        }
     }
 
     .highlight-by {
-        flex: 1;
         padding: 10px;
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: center;
-        vertical-align: middle;
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+
+        .highlight-input {
+            padding: 0;
+            margin: 5px;
+            width: 100px;
+        }
     }
+}
+
+.modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+    background-color: rgb(212, 238, 247);
+    border: 2px solid rgb(0, 0, 0);
+    padding: 10px;
+}
+
+.overlay {
+    z-index: 1000;
+    opacity: 0.2;
+    background-color: rgb(255, 255, 255);
+    
 }

@@ -1,56 +1,66 @@
-<div class="main">
-  <div class="table">
-    <table>
-      <tr>
-        <th>№</th>
-        <th (click)="sortBy('lastName')">Last name</th>
-        <th (click)="sortBy('firstName')">First name</th>
-        <th (click)="sortBy('midName')">Mid name</th>
-        <th (click)="sortBy('birthDate')">Date of birth</th>
-        <th (click)="sortBy('averageScore')">Average score</th>
-      </tr>
-      <tr #table *ngFor="let student of filteredStudents; let i = index" [ngClass]="{scoreThree: isThreeScore(student) && threeScoreFlag === true,
-      averageHighlight: highlightStudentsBy(student)}">
-        <td>{{i + 1}}</td>
-        <td>{{student.lastName}}</td>
-        <td>{{student.firstName}}</td>
-        <td>{{student.midName}}</td>
-        <td>{{getBirthdate(student.birthDate)}}</td>
-        <td>{{student.averageScore}}</td>
-      </tr>
-    </table>
-  </div>
+<div class="main" [ngClass]="{overlay: popupVisibility}">
+  <table class="table">
+    <tr>
+      <th>№</th>
+      <th (click)="sortBy('lastName')">Last name</th>
+      <th (click)="sortBy('firstName')">First name</th>
+      <th (click)="sortBy('midName')">Mid name</th>
+      <th (click)="sortBy('birthDate')">Date of birth</th>
+      <th (click)="sortBy('averageScore')">Average score</th>
+    </tr>
+    <tr *ngFor="let student of filteredStudents; let i = index" [ngClass]="{scoreThree: isThreeScore(student) && threeScoreFlag === true,
+    averageHighlight: highlightStudentsBy(student)}">
+      <td>{{i + 1}}</td>
+      <td>{{student.lastName}}</td>
+      <td>{{student.firstName}}</td>
+      <td>{{student.midName}}</td>
+      <td>{{getBirthdate(student.birthDate)}}</td>
+      <td>{{student.averageScore}}</td>
+      <td><button (click)="deleteClick(i)">Delete</button></td>
+    </tr>
+  </table>
+
   <div class="control-panel">
     <div class="highlight-average-three">
-      <p>Highlight students with an average grade of 3 and below</p>
-      <input type="checkbox" (change)="threeScoreFlag=!threeScoreFlag">
+      <span class="highlight-average-three__text" >Highlight students with an average grade of 3 and below</span>
+      <input type="checkbox" class="highlight-average-three__checkbox" (change)="threeScoreFlag=!threeScoreFlag">
     </div>
-    <div class="filter-by"> Filter by: 
-      <select name="filter-by__select" id="filter-by" [(ngModel)]="filterBy">
-        <option value="birthDate">Date of birth</option>
-        <option value="averageScore">Average score</option>
-      </select>
-      <p>Enter value to filter the list</p>
-      <div class="filter-by__date-input" *ngIf="this.filterBy === 'birthDate'">
-        <span>Date:</span>
-        <input type="text" class="input-date"[(ngModel)]="filterDate">
-        <span>Month:</span>
-        <input type="text" class="input-month" [(ngModel)]="filterMonth">
-        <span>Year:</span>
-        <input type="text" class="input-year" [(ngModel)]="filterYear">
+    <div class="filter-by">
+      <span class="filter-by__text">Enter value to filter the list</span>
+      <div class="filter-by__date-input">
+        <span class="text-date">Date:</span>
+        <input type="text" class="filter-input" [(ngModel)]="filterDate">
+        <span class="text-month">Month:</span>
+        <input type="text" class="filter-input" [(ngModel)]="filterMonth">
+        <span class="text-year">Year:</span>
+        <input type="text" class="filter-input" [(ngModel)]="filterYear">
+        <br>
         <button (click)="filterStudents()">Filter</button>
         <button (click)="resetFilters()">Reset filter</button>
       </div>
       <div class="filter-by__average-input">
-        <input type="text" class="filter-input" *ngIf="this.filterBy === 'averageScore'" [(ngModel)]="filterString" (onchange)="filterStudents()">
+        <span>or average</span>
+        <input type="text" class="filter-input" [(ngModel)]="filterString" (onchange)="filterStudents()">
+        <br>
         <button (click)="filterStudents()">Filter</button>
         <button (click)="resetFilters()">Reset filter</button>
       </div>
     </div>
-    <div class="highlight-by"> Highlight by name: 
+    <div class="highlight-by"> 
+      <span>Highlight by name:</span> 
       <input type="text" class="highlight-input" [(ngModel)]="firstName">
-      or surname:
+      <br>
+      <span>or surname:</span>
       <input type="text" class="highlight-input" [(ngModel)]="lastName">
     </div>
+    <button>Add student</button>
   </div>
+</div>
+<div class="modal" *ngIf="popupVisibility">
+  <span>{{this.systemMessage.message}}</span>
+  <div>
+    <button (click)="popupAction()">Ok</button>
+    <button (click)="popupVisibility = false">Cancel</button>
+  </div>
+  
 </div>

@@ -1,0 +1,18 @@
+<form [formGroup]="stydentForm" (ngSubmit)="onSubmit()">
+    <div formGroupName="name">
+        <span>Enter name:</span>
+        <input type="text" class="form-control" formControlName="lastName" placeholder="last name">
+        <input type="text" class="form-control" formControlName="firstName" placeholder="firsr name">
+        <input type="text" class="form-control" formControlName="midName" placeholder="mid name">
+    </div>
+    <div formGroupName="birthDate">
+        <span>Enter birth date:</span>
+        <input type="text" class="form-control" formControlName="date" placeholder="date">
+        <input type="text" class="form-control" formControlName="month" placeholder="month">
+        <input type="text" class="form-control" formControlName="year" placeholder="year">
+    </div>
+    <span>Enter average score:</span>
+    <input type="text" class="form-control" formControlName="averageScore" placeholder="average score">
+    <button type="submit">Ok</button>
+    <button type="reset"></button>
+</form>

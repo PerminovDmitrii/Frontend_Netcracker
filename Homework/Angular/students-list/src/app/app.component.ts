@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import StudentsData from "../assets/students-list.json";
 
 export interface Student {
+  id: number;
   lastName: string;
   firstName: string;
   midName: string;
@@ -23,6 +24,7 @@ export class AppComponent {
     const students: Student[] = [];
     for (const studentData of data) {
       const student: Student = {
+        id: studentData.id,
         lastName: studentData.lastName,
         firstName: studentData.firstName,
         midName: studentData.midName,

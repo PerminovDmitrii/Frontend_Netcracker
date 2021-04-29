@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Student } from "../app.component";
-
 
 @Component({
   selector: "app-table",
@@ -13,7 +12,6 @@ export class TableComponent implements OnInit {
 
   public threeScoreFlag: boolean = false;
   public highlightString: string = "";
-  public filterBy: string = "";
   public filterString: string = "";
   public filteredStudents: Student[] = [];
   public filterDate: string = "";
@@ -23,8 +21,17 @@ export class TableComponent implements OnInit {
   public lastName: string = "";
   public sortedStudents: Student[] = this.filteredStudents;
   private reverseSortFlags: boolean[] = [];
-
-  constructor() { }
+  public deletedStudentId: number = 0;
+  public systemMessage = {
+    message: "",
+    type: ""
+  };
+  public popupVisibility: boolean = false;
+  public confirmDelete: boolean = false;
+  public addFlag: boolean = false;
+  public editStartFlag: boolean = false;
+  public editEndFlag: boolean = false;
+  public editedStudent: Student = this.students[0];
 
   ngOnInit(): void {
     this.filteredStudents = this.students;
@@ -50,7 +57,9 @@ export class TableComponent implements OnInit {
   }
 
   private filterByAverage(): void {
+    this.filteredStudents = [];
     for (const student of this.students) {
+      console.log(this.filteredStudents);
       if (Number(this.filterString) === student.averageScore) {
         this.filteredStudents.push(student);
       }
@@ -58,6 +67,7 @@ export class TableComponent implements OnInit {
   }
 
   private filterByDate(): void {
+    this.filteredStudents = [];
     const filterYear = Number(this.filterYear);
     const filterMonth = Number(this.filterMonth);
     const filterDate = Number(this.filterDate);
@@ -68,7 +78,6 @@ export class TableComponent implements OnInit {
         || filterDate !== student.birthDate.getDate()) {
           continue;
         }
-        console.log(student);
         this.filteredStudents.push(student);
         continue;
       }
@@ -91,11 +100,12 @@ export class TableComponent implements OnInit {
 
   public filterStudents(): void {
     this.filteredStudents = [];
-    if (this.filterBy === "birthDate") {
-      this.filterByDate();
-    }
-    if (this.filterBy === "averageScore") {
+    if (this.filterString !== "") {
       this.filterByAverage();
+    }
+    if (this.filterYear !== "" || this.filterMonth !== "" || this.filterDate !== "") {
+      this.filterByAverage();
+      this.filterByDate();
     }
   }
 
@@ -123,55 +133,86 @@ export class TableComponent implements OnInit {
   public sortBy(by: string): void {
     switch (by) {
       case "lastName": {
-        if (this.reverseSortFlags[0] === true) {
-          this.students.reverse();
-          this.reverseSortFlags[0] = false;
-          break;
-        }
-        this.filteredStudents.sort( (a: Student, b: Student): number => a.lastName > b.lastName ? 1 : -1 );
-        this.reverseSortFlags[0] = true;
-        break;
-      }
-      case "firstName": {
         if (this.reverseSortFlags[1] === true) {
           this.students.reverse();
           this.reverseSortFlags[1] = false;
           break;
         }
-        this.filteredStudents.sort( (a: Student, b: Student): number => a.firstName > b.firstName ? 1 : -1) ;
+        this.filteredStudents.sort( (a: Student, b: Student): number => a.lastName > b.lastName ? 1 : -1 );
         this.reverseSortFlags[1] = true;
         break;
       }
-      case "midName": {
+      case "firstName": {
         if (this.reverseSortFlags[2] === true) {
           this.students.reverse();
           this.reverseSortFlags[2] = false;
           break;
         }
-        this.filteredStudents.sort( (a: Student, b: Student): number => a.midName > b.midName ? 1 : -1) ;
+        this.filteredStudents.sort( (a: Student, b: Student): number => a.firstName > b.firstName ? 1 : -1) ;
         this.reverseSortFlags[2] = true;
         break;
       }
-      case "birthDate": {
+      case "midName": {
         if (this.reverseSortFlags[3] === true) {
           this.students.reverse();
           this.reverseSortFlags[3] = false;
           break;
         }
-        this.filteredStudents.sort( (a: Student, b: Student): number => a.birthDate > b.birthDate ? 1 : -1) ;
+        this.filteredStudents.sort( (a: Student, b: Student): number => a.midName > b.midName ? 1 : -1) ;
         this.reverseSortFlags[3] = true;
         break;
       }
-      case "averageScore": {
+      case "birthDate": {
         if (this.reverseSortFlags[4] === true) {
           this.students.reverse();
           this.reverseSortFlags[4] = false;
           break;
         }
-        this.filteredStudents.sort( (a: Student, b: Student): number => a.averageScore > b.averageScore ? 1 : -1) ;
+        this.filteredStudents.sort( (a: Student, b: Student): number => a.birthDate > b.birthDate ? 1 : -1) ;
         this.reverseSortFlags[4] = true;
         break;
       }
+      case "averageScore": {
+        if (this.reverseSortFlags[5] === true) {
+          this.students.reverse();
+          this.reverseSortFlags[5] = false;
+          break;
+        }
+        this.filteredStudents.sort( (a: Student, b: Student): number => a.averageScore > b.averageScore ? 1 : -1) ;
+        this.reverseSortFlags[5] = true;
+        break;
+      }
     }
+  }
+
+  public deleteStudent(deletedStudentId: number): void {
+    if (this.confirmDelete === true) {
+      this.filteredStudents.splice(deletedStudentId, 1);
+    }
+  }
+
+  public popupAction(): void {
+    if (this.systemMessage.type === "delete") {
+      this.confirmDelete = true;
+      this.deleteStudent(this.deletedStudentId);
+      this.popupVisibility = false;
+    }
+  }
+
+  public deleteClick(i: number): void {
+    this.deletedStudentId = i;
+    this.popupVisibility = true;
+    this.systemMessage.type = "delete";
+    this.systemMessage.message = "Are you sure you want to delete record from the table?";
+  }
+
+  public onStudentClick(id: number): void {
+    this.editStartFlag = true;
+    this.editedStudent = this.filteredStudents[id];
+  }
+
+  public addStudentClick(): void {
+    console.log(this.filteredStudents);
+    this.addFlag = true;
   }
 }

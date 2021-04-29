@@ -27,6 +27,7 @@
     "fullTemplateTypeCheck": true,
     "preserveWhitespaces": true,
     "strictTemplates": true,
-    "strictInjectionParameters": true
+    "strictInjectionParameters": true,
+    "strictPropertyInitialization": false
   }
 }

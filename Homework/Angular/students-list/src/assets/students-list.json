@@ -1,5 +1,6 @@
 [ 
     {
+        "id": 0,
         "lastName": "Смирнова",
         "firstName": "Светлана",
         "midName": "Ивановна",
@@ -7,6 +8,7 @@
         "averageScore": "4"
     },
     {
+        "id": 1,
         "lastName": "Баранов",
         "firstName": "Иван",
         "midName": "Андреевич",
@@ -14,6 +16,7 @@
         "averageScore": "3"
     },
     {
+        "id": 2,
         "lastName": "Давыдов",
         "firstName":"Александр",
         "midName": "Маркович",
@@ -21,6 +24,7 @@
         "averageScore": "5"
     },
     {
+        "id": 3,
         "lastName": "Дементьева",
         "firstName":"Полина",
         "midName": "Андреевна",
@@ -28,6 +32,7 @@
         "averageScore": "4"
     },
     {
+        "id": 4,
         "lastName": "Иванов",
         "firstName":"Артём",
         "midName": "Михайлович",
@@ -35,6 +40,7 @@
         "averageScore": "4"
     },
     {
+        "id": 5,
         "lastName": "Павлова",
         "firstName":"Анна",
         "midName": "Романовна",
@@ -42,6 +48,7 @@
         "averageScore": "5"
     },
     {
+        "id": 6,
         "lastName": "Медведев",
         "firstName":"Михаил",
         "midName": "Романович",
@@ -49,6 +56,7 @@
         "averageScore": "3"
     },
     {
+        "id": 7,
         "lastName": "Никифоров",
         "firstName":"Владислав",
         "midName": "Ильич",
@@ -56,6 +64,7 @@
         "averageScore": "5"
     },
     {
+        "id": 8,
         "lastName": "Маркова",
         "firstName":"Елизавета",
         "midName": "Васильевна",
@@ -63,6 +72,7 @@
         "averageScore": "4"
     },
     {
+        "id": 9,
         "lastName": "Гришина",
         "firstName":"Дарья",
         "midName": "Дмитриевна",
