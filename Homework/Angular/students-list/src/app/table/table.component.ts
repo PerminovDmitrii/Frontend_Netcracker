@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, Input, OnChanges, OnInit } from "@angular/core";
 import { Student } from "../app.component";
 
 @Component({
@@ -29,13 +29,14 @@ export class TableComponent implements OnInit {
   public popupVisibility: boolean = false;
   public confirmDelete: boolean = false;
   public addFlag: boolean = false;
-  public editStartFlag: boolean = false;
-  public editEndFlag: boolean = false;
-  public editedStudent: Student = this.students[0];
+  public editFlag: boolean = false;
+  public editFlagEnd: boolean = false;
+  public editedStudent!: Student;
 
   ngOnInit(): void {
     this.filteredStudents = this.students;
   }
+
 
   public getBirthdate(date: Date): string {
     let month: string = (date.getMonth() + 1).toString();
@@ -207,12 +208,11 @@ export class TableComponent implements OnInit {
   }
 
   public onStudentClick(id: number): void {
-    this.editStartFlag = true;
+    this.editFlag = true;
     this.editedStudent = this.filteredStudents[id];
   }
 
   public addStudentClick(): void {
-    console.log(this.filteredStudents);
     this.addFlag = true;
   }
 }

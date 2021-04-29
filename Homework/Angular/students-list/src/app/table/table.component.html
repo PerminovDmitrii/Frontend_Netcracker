@@ -1,4 +1,4 @@
-<div class="main" [ngClass]="{overlay: popupVisibility}">
+<div class="main" [ngClass]="{overlay: popupVisibility || addFlag || editFlag}">
   <table class="table">
     <tr>
       <th>№</th>
@@ -16,6 +16,7 @@
       <td>{{student.midName}}</td>
       <td>{{getBirthdate(student.birthDate)}}</td>
       <td>{{student.averageScore}}</td>
+      <td><button (click)="onStudentClick(i)">Edite</button></td>
       <td><button (click)="deleteClick(i)">Delete</button></td>
     </tr>
   </table>
@@ -53,7 +54,7 @@
       <span>or surname:</span>
       <input type="text" class="highlight-input" [(ngModel)]="lastName">
     </div>
-    <button>Add student</button>
+    <button (click)="this.addStudentClick()">Add student</button>
   </div>
 </div>
 <div class="modal" *ngIf="popupVisibility">
@@ -62,5 +63,6 @@
     <button (click)="popupAction()">Ok</button>
     <button (click)="popupVisibility = false">Cancel</button>
   </div>
-  
 </div>
+<app-student-form [addFlag]="addFlag" [editFlag]="editFlag" [editedStudent]="editedStudent" (editFlagChange)="editFlag=$event"
+  (addFlagChange)="addFlag=$event" (editedStudentChange)="editedStudent=$event" *ngIf="this.addFlag || this.editFlag"></app-student-form>
