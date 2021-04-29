@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from "@angular/forms";
 import { Student } from "src/app/app.component";
 
 export interface Value {
@@ -37,19 +37,22 @@ export class StudentFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.editedStudent)
     if (this.editFlag === true) {
       this.studentForm = new FormGroup({
         name: new FormGroup({
-          lastName: new FormControl(this.editedStudent.lastName, [Validators.required]),
-          firstName: new FormControl(this.editedStudent.firstName, [Validators.required]),
-          midName: new FormControl(this.editedStudent.midName, [Validators.required])
+          lastName: new FormControl(this.editedStudent.lastName),
+          firstName: new FormControl(this.editedStudent.firstName),
+          midName: new FormControl(this.editedStudent.midName)
         }, [Validators.required, Validators.minLength(2), Validators.maxLength(12)]),
         birthDate: new FormGroup({
-          date: new FormControl(this.editedStudent.birthDate.getDate()),
-          month: new FormControl(this.editedStudent.birthDate.getMonth()),
-          year: new FormControl(this.editedStudent.birthDate.getFullYear())
-        }),
-        averageScore: new FormControl(this.editedStudent.averageScore)
+          date: new FormControl(this.editedStudent.birthDate.getDate(), [Validators.maxLength(2), Validators.max(31), Validators.min(0)]),
+          month: new FormControl(this.editedStudent.birthDate.getMonth(), [Validators.maxLength(2), Validators.max(12), Validators.min(1)]),
+          year: new FormControl(this.editedStudent.birthDate.getFullYear(), [Validators.maxLength(4), Validators.minLength(4),
+            Validators.max(2021), Validators.min(1990)])
+        }, [Validators.required]),
+        averageScore: new FormControl(this.editedStudent.averageScore, [Validators.required, Validators.maxLength(1), Validators.min(2),
+        Validators.max(5)])
       });
     }
     if (this.addFlag === true) {
@@ -85,6 +88,7 @@ export class StudentFormComponent implements OnInit {
     this.onClose();
   }
 
+
   onClose(): void {
     this.addFlagChange.emit(false);
     this.editFlagChange.emit(false);
@@ -92,29 +96,33 @@ export class StudentFormComponent implements OnInit {
   }
 }
 
-function birthDate(formGroup: FormGroup) {
+function birthDate(formGroup: FormGroup): {[key: string]: boolean} | null {
   const now = new Date();
   if ( now.getFullYear() - Number(formGroup.value.birthDate.year < 10) ) {
-    return { birthDate: { message: "Date of birth later than 10 years ago" } };
+    return {"Date of birth later than 10 years ago": true};
   }
   if (now.getFullYear() - Number(formGroup.value.birthDate.year) === 10) {
     if ( now.getMonth() < Number(formGroup.value.birthDate.month) ) {
-      return { birthDate: { message: "Date of birth later than 10 years ago" } };
+      return {"Date of birth later than 10 years ago": true};
     }
   }
   if (now.getFullYear() - Number(formGroup.value.birthDate.year) === 10) {
     if ( now.getMonth() === Number(formGroup.value.birthDate.month) ) {
       if ( now.getDate() < Number(formGroup.value.birthDate.date) ) {
-        return { birthDate: { message: "Date of birth later than 10 years ago" } };
+        return {"Date of birth later than 10 years ago": true};
       }
     }
   }
   return null;
 }
 
-function lsFsMidName(formGroup: FormGroup) {
-  if (formGroup.value.lastName === formGroup.value.first.name || formGroup.value.firstName === formGroup.value.midName) {
-    return { lsFsMidName: { message: "Тame that matches the last name or mid name" } };
+function lsFsMidName(control: AbstractControl): ValidationErrors | null {
+  if (control.value.name.lastName === control.value.name.first.name || control.value.name.firstName === control.value.name.midName) {
+    return { lsFsMidName: {
+      valid: false
+      }
+    }
+    // return {"Тame that matches the last name or mid name": true};
   }
   return null;
 }
