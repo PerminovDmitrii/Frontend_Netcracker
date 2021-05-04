@@ -11,11 +11,11 @@
     <tr appHighlightStudent *ngFor="let student of filteredStudents; let i = index" [ngClass]="{scoreThree: isThreeScore(student) && threeScoreFlag === true,
     averageHighlight: highlightStudentsBy(student)}">
       <td>{{i + 1}}</td>
-      <td>{{student.lastName}}</td>
-      <td>{{student.firstName}}</td>
-      <td>{{student.midName}}</td>
+      <td>{{student.lastName | scholarshipPipe : student.averageScore}}</td>
+      <td>{{student.firstName | scholarshipPipe : student.averageScore}}</td>
+      <td>{{student.midName | scholarshipPipe : student.averageScore}}</td>
       <td>{{getBirthdate(student.birthDate)}}</td>
-      <td>{{student.averageScore}}</td>
+      <td>{{student.averageScore | averagePipe}}</td>
       <td><button appClickableButton (click)="onStudentClick(i)">Edite</button></td>
       <td><button appClickableButton (click)="deleteClick(i)">Delete</button></td>
     </tr>
