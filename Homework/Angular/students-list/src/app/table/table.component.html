@@ -2,13 +2,13 @@
   <table class="table">
     <tr>
       <th>№</th>
-      <th (click)="sortBy('lastName')">Last name</th>
-      <th (click)="sortBy('firstName')">First name</th>
-      <th (click)="sortBy('midName')">Mid name</th>
-      <th (click)="sortBy('birthDate')">Date of birth</th>
-      <th (click)="sortBy('averageScore')">Average score</th>
+      <th appClickableButton (click)="sortBy('lastName')">Last name</th>
+      <th appClickableButton (click)="sortBy('firstName')">First name</th>
+      <th appClickableButton (click)="sortBy('midName')">Mid name</th>
+      <th appClickableButton (click)="sortBy('birthDate')">Date of birth</th>
+      <th appClickableButton (click)="sortBy('averageScore')">Average score</th>
     </tr>
-    <tr *ngFor="let student of filteredStudents; let i = index" [ngClass]="{scoreThree: isThreeScore(student) && threeScoreFlag === true,
+    <tr appHighlightStudent *ngFor="let student of filteredStudents; let i = index" [ngClass]="{scoreThree: isThreeScore(student) && threeScoreFlag === true,
     averageHighlight: highlightStudentsBy(student)}">
       <td>{{i + 1}}</td>
       <td>{{student.lastName}}</td>
@@ -16,8 +16,8 @@
       <td>{{student.midName}}</td>
       <td>{{getBirthdate(student.birthDate)}}</td>
       <td>{{student.averageScore}}</td>
-      <td><button (click)="onStudentClick(i)">Edite</button></td>
-      <td><button (click)="deleteClick(i)">Delete</button></td>
+      <td><button appClickableButton (click)="onStudentClick(i)">Edite</button></td>
+      <td><button appClickableButton (click)="deleteClick(i)">Delete</button></td>
     </tr>
   </table>
 
@@ -36,15 +36,15 @@
         <span class="text-year">Year:</span>
         <input type="text" class="filter-input" [(ngModel)]="filterYear">
         <br>
-        <button (click)="filterStudents()">Filter</button>
-        <button (click)="resetFilters()">Reset filter</button>
+        <button appClickableButton (click)="filterStudents()">Filter</button>
+        <button appClickableButton (click)="resetFilters()">Reset filter</button>
       </div>
       <div class="filter-by__average-input">
         <span>or average</span>
         <input type="text" class="filter-input" [(ngModel)]="filterString" (onchange)="filterStudents()">
         <br>
-        <button (click)="filterStudents()">Filter</button>
-        <button (click)="resetFilters()">Reset filter</button>
+        <button appClickableButton (click)="filterStudents()">Filter</button>
+        <button appClickableButton (click)="resetFilters()">Reset filter</button>
       </div>
     </div>
     <div class="highlight-by"> 
@@ -54,14 +54,14 @@
       <span>or surname:</span>
       <input type="text" class="highlight-input" [(ngModel)]="lastName">
     </div>
-    <button (click)="this.addStudentClick()">Add student</button>
+    <button appClickableButton (click)="this.addStudentClick()">Add student</button>
   </div>
 </div>
 <div class="modal" *ngIf="popupVisibility">
   <span>{{this.systemMessage.message}}</span>
   <div>
-    <button (click)="popupAction()">Ok</button>
-    <button (click)="popupVisibility = false">Cancel</button>
+    <button appClickableButton (click)="popupAction()">Ok</button>
+    <button appClickableButton (click)="popupVisibility = false">Cancel</button>
   </div>
 </div>
 <app-student-form [addFlag]="addFlag" [editFlag]="editFlag" [editedStudent]="editedStudent" (editFlagChange)="editFlag=$event"
