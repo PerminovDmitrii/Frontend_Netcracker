@@ -65,4 +65,5 @@
   </div>
 </div>
 <app-student-form [addFlag]="addFlag" [editFlag]="editFlag" [editedStudent]="editedStudent" (editFlagChange)="editFlag=$event"
-  (addFlagChange)="addFlag=$event" (editedStudentChange)="editedStudent=$event" *ngIf="this.addFlag || this.editFlag"></app-student-form>
+  (addFlagChange)="addFlag=$event" [filteredStudents]="filteredStudents" (filteredStudentsChange)="filteredStudents=$event"
+  *ngIf="this.addFlag || this.editFlag"></app-student-form>

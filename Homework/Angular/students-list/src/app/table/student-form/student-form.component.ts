@@ -26,18 +26,25 @@ export class StudentFormComponent implements OnInit {
   @Input() addFlag: boolean = false;
   @Input() editFlag: boolean = false;
   @Input() editedStudent!: Student;
+  @Input() filteredStudents: Student[] = [];
   @Output() editFlagChange = new EventEmitter<boolean>();
   @Output() addFlagChange = new EventEmitter<boolean>();
-  @Output() editedStudentChange = new EventEmitter<Student>();
+  @Output() filteredStudentsChange = new EventEmitter<Student[]>();
 
-  editStudentData!: Student;
+  editStudentData: Student = {
+    id: 0,
+    lastName: "",
+    firstName: "",
+    midName: "",
+    birthDate: new Date("2000-01-01"),
+    averageScore: 0,
+  };
 
   studentForm!: FormGroup;
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.editedStudent)
     if (this.editFlag === true) {
       this.studentForm = new FormGroup({
         name: new FormGroup({
@@ -73,18 +80,33 @@ export class StudentFormComponent implements OnInit {
   }
 
   editedStudentHelper(value: Value): void {
-    this.editStudentData.id = this.editedStudent.id;
+    this.addFlag === true ? this.editStudentData.id = this.filteredStudents.length : this.editStudentData.id = this.editedStudent.id;
     this.editStudentData.lastName = value.name.lastName;
     this.editStudentData.firstName = value.name.firstName;
     this.editStudentData.midName = value.name.midName;
     this.editStudentData.birthDate = new Date(value.birthDate.year + "-" + value.birthDate.month + "-" + value.birthDate.date);
     this.editStudentData.averageScore = Number(value.averageScore);
+
+    if (this.addFlag === false) {
+      this.filteredStudents[this.editedStudent.id].lastName = value.name.lastName;
+      this.filteredStudents[this.editedStudent.id].firstName = value.name.firstName;
+      this.filteredStudents[this.editedStudent.id].midName = value.name.midName;
+      this.filteredStudents[this.editedStudent.id].birthDate = new Date(value.birthDate.year + "-" + value.birthDate.month + "-" + value.birthDate.date);
+      this.filteredStudents[this.editedStudent.id].averageScore = Number(value.averageScore);
+    } else {
+      this.editStudentData.id = this.filteredStudents.length;
+      this.editStudentData.lastName = value.name.lastName;
+      this.editStudentData.firstName = value.name.firstName;
+      this.editStudentData.midName = value.name.midName;
+      this.editStudentData.birthDate = new Date(value.birthDate.year + "-" + value.birthDate.month + "-" + value.birthDate.date);
+      this.editStudentData.averageScore = Number(value.averageScore);
+      this.filteredStudents.push(this.editStudentData);
+    }
   }
 
   onSubmit(): void {
     this.editedStudentHelper(this.studentForm.value);
-    console.log(this.editStudentData);
-    this.editedStudentChange.emit(this.studentForm.value);
+    this.filteredStudentsChange.emit(this.filteredStudents);
     this.onClose();
   }
 
@@ -121,7 +143,7 @@ function lsFsMidName(control: AbstractControl): ValidationErrors | null {
     return { lsFsMidName: {
       valid: false
       }
-    }
+    };
     // return {"Тame that matches the last name or mid name": true};
   }
   return null;

@@ -32,6 +32,7 @@ export class TableComponent implements OnInit {
   public editFlag: boolean = false;
   public editFlagEnd: boolean = false;
   public editedStudent!: Student;
+  public studentsListLenght: number = 0;
 
   ngOnInit(): void {
     this.filteredStudents = this.students;
@@ -213,6 +214,11 @@ export class TableComponent implements OnInit {
   }
 
   public addStudentClick(): void {
+    this.studentsListLenght = this.students.length;
     this.addFlag = true;
+  }
+
+  studentChange(student: Student): void {
+
   }
 }
