@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnInit } from "@angular/core";
 import { Student } from "../app.component";
 
 @Component({
@@ -33,6 +33,8 @@ export class TableComponent implements OnInit {
   public editFlagEnd: boolean = false;
   public editedStudent!: Student;
   public studentsListLenght: number = 0;
+
+  constructor(private cd: ChangeDetectorRef) {  }
 
   ngOnInit(): void {
     this.filteredStudents = this.students;
