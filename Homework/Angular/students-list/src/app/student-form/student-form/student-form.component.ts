@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { Student } from "src/app/app.component";
 
@@ -18,6 +18,7 @@ export interface Value {
 
 @Component({
   selector: "app-student-form",
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: "./student-form.component.html",
   styleUrls: ["./student-form.component.scss"]
 })

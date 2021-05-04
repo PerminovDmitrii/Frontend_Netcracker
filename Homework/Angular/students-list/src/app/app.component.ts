@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import StudentsData from "../assets/students-list.json";
 
 export interface Student {
@@ -12,6 +12,7 @@ export interface Student {
 
 @Component({
   selector: "app-root",
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"]
 })

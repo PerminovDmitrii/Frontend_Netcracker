@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
 import { Student } from "../app.component";
 
 @Component({
   selector: "app-table",
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: "./table.component.html",
   styleUrls: ["./table.component.scss"]
 })
@@ -63,7 +64,6 @@ export class TableComponent implements OnInit {
   private filterByAverage(): void {
     this.filteredStudents = [];
     for (const student of this.students) {
-      console.log(this.filteredStudents);
       if (Number(this.filterString) === student.averageScore) {
         this.filteredStudents.push(student);
       }
