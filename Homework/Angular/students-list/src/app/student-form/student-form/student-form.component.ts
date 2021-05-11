@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
-import { Student } from "src/app/app.component";
+import { Student } from "src/app/table/local.table.service";
 
 export interface Value {
   name: {
@@ -28,6 +28,7 @@ export class StudentFormComponent implements OnInit {
   @Input() editFlag: boolean = false;
   @Input() editedStudent!: Student;
   @Input() filteredStudents: Student[] = [];
+  @Input() loadType: string = "";
   @Output() editFlagChange = new EventEmitter<boolean>();
   @Output() addFlagChange = new EventEmitter<boolean>();
   @Output() filteredStudentsChange = new EventEmitter<Student[]>();

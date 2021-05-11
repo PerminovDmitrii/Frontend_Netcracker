@@ -2,6 +2,7 @@
   <table class="table">
     <tr>
       <th>№</th>
+      <th>ID</th>
       <th appClickableButton (click)="sortBy('lastName')">Last name</th>
       <th appClickableButton (click)="sortBy('firstName')">First name</th>
       <th appClickableButton (click)="sortBy('midName')">Mid name</th>
@@ -11,12 +12,13 @@
     <tr appHighlightStudent *ngFor="let student of filteredStudents; let i = index" [ngClass]="{scoreThree: isThreeScore(student) && threeScoreFlag === true,
     averageHighlight: highlightStudentsBy(student)}">
       <td>{{i + 1}}</td>
+      <td>{{student.id}}</td>
       <td>{{student.lastName | scholarshipPipe : student.averageScore}}</td>
       <td>{{student.firstName | scholarshipPipe : student.averageScore}}</td>
       <td>{{student.midName | scholarshipPipe : student.averageScore}}</td>
       <td>{{getBirthdate(student.birthDate)}}</td>
       <td>{{student.averageScore | averagePipe}}</td>
-      <td><button appClickableButton (click)="onStudentClick(i)">Edite</button></td>
+      <td><button appClickableButton (click)="onStudentClick(i)" [routerLink]="'edit/' + student.id" >Edit</button></td>
       <td><button appClickableButton (click)="deleteClick(i)">Delete</button></td>
     </tr>
   </table>
@@ -54,7 +56,7 @@
       <span>or surname:</span>
       <input type="text" class="highlight-input" [(ngModel)]="lastName">
     </div>
-    <button appClickableButton (click)="this.addStudentClick()">Add student</button>
+    <button appClickableButton (click)="this.addStudentClick()" routerLink="create">Add student</button>
   </div>
 </div>
 <div class="modal" *ngIf="popupVisibility">
@@ -66,4 +68,4 @@
 </div>
 <app-student-form [addFlag]="addFlag" [editFlag]="editFlag" [editedStudent]="editedStudent" (editFlagChange)="editFlag=$event"
   (addFlagChange)="addFlag=$event" [filteredStudents]="filteredStudents" (filteredStudentsChange)="filteredStudents=$event"
-  *ngIf="this.addFlag || this.editFlag"></app-student-form>
+  *ngIf="this.addFlag || this.editFlag" [loadType]="loadType"></app-student-form>

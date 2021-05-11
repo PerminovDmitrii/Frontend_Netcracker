@@ -1,5 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
-import { Student } from "../app.component";
+import { ActivatedRoute, ActivatedRouteSnapshot } from "@angular/router";
+import StudentsData from "src/assets/students-list.json";
+import { StudentService } from "../student.service";
+import { LocalTableService, Student } from "./local.table.service";
+import { ServerTableService } from "./server.table.service";
 
 @Component({
   selector: "app-table",
@@ -34,11 +38,21 @@ export class TableComponent implements OnInit {
   public editFlagEnd: boolean = false;
   public editedStudent!: Student;
   public studentsListLenght: number = 0;
+  public loadType: string = "";
 
-  constructor(private cd: ChangeDetectorRef) {  }
+  constructor(private cd: ChangeDetectorRef, private localTableService: LocalTableService, private serverTableService: ServerTableService,
+    private snapshot: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.filteredStudents = this.students;
+
+    if (this.snapshot.snapshot.params["param"] === "localStore") {
+      this.filteredStudents = this.localTableService.loadStudents();
+      this.loadType = this.snapshot.snapshot.params["param"];
+    }
+    if (this.snapshot.snapshot.params["param"] === "serverStore") {
+      this.filteredStudents = this.serverTableService.loadStudents();
+      this.loadType = this.snapshot.snapshot.params["param"];
+    }
   }
 
 
@@ -220,7 +234,7 @@ export class TableComponent implements OnInit {
     this.addFlag = true;
   }
 
-  studentChange(student: Student): void {
-
+  public getStudents(): Student[] {
+    return this.filteredStudents;
   }
 }

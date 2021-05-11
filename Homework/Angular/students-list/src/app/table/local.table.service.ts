@@ -20,9 +20,9 @@ export class SystemMessage {
 
 @Injectable({providedIn: "root"})
 
-export class TableService {
+export class LocalTableService {
 
-    public jsonHelper(data: typeof StudentsData ): Student[] {
+    public jsonHelper(data: typeof StudentsData): Student[] {
         const students: Student[] = [];
         for (const studentData of data) {
         const student: Student = {
@@ -36,5 +36,9 @@ export class TableService {
         students.push(student);
         }
         return students;
+    }
+
+    public loadStudents(): Student[] {
+        return this.jsonHelper(StudentsData);
     }
 }
