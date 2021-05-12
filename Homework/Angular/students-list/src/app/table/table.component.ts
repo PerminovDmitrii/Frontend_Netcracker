@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
+import { Provider } from "@angular/compiler/src/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Injectable, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, ActivatedRouteSnapshot } from "@angular/router";
 import StudentsData from "src/assets/students-list.json";
 import { StudentService } from "../student.service";
 import { LocalTableService, Student } from "./local.table.service";
 import { ServerTableService } from "./server.table.service";
+import { GET_STUDENTS_DATA } from "./table.providers";
 
 @Component({
   selector: "app-table",
@@ -41,10 +43,11 @@ export class TableComponent implements OnInit {
   public loadType: string = "";
 
   constructor(private cd: ChangeDetectorRef, private localTableService: LocalTableService, private serverTableService: ServerTableService,
-    private snapshot: ActivatedRoute) { }
+    private snapshot: ActivatedRoute, private studentService: StudentService) { }
 
   ngOnInit(): void {
 
+    // this.filteredStudents =  this.studentsList$;
     if (this.snapshot.snapshot.params["param"] === "localStore") {
       this.filteredStudents = this.localTableService.loadStudents();
       this.loadType = this.snapshot.snapshot.params["param"];

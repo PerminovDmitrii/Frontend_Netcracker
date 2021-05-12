@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 import { Student } from "src/app/table/local.table.service";
 
 export interface Value {
@@ -44,7 +45,7 @@ export class StudentFormComponent implements OnInit {
 
   studentForm!: FormGroup;
 
-  constructor() { }
+  constructor( private router: Router) { }
 
   ngOnInit(): void {
     if (this.editFlag === true) {
@@ -116,7 +117,7 @@ export class StudentFormComponent implements OnInit {
   onClose(): void {
     this.addFlagChange.emit(false);
     this.editFlagChange.emit(false);
-
+    this.router.navigate([`/students-table/${this.loadType}`]);
   }
 }
 

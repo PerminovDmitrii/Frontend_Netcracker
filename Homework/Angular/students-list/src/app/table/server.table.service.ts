@@ -13,7 +13,7 @@ export class ServerTableService {
 
     public getStudents(): void {
         this.http.get("http://localhost:3000/students").subscribe((response: any) => {
-            this.jsonHelper(response);
+        this.jsonHelper(response);
         });
     }
 

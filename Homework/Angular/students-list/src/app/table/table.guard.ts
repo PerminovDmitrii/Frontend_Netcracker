@@ -13,7 +13,7 @@ export class TableGuard implements CanActivate {
     canActivate(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot,
-    ): Observable<boolean> | boolean {
+    ): boolean {
 
         function findStudentByID (value: Student, index: number, array: Array<object>): boolean {
             if (value.id === findID) {

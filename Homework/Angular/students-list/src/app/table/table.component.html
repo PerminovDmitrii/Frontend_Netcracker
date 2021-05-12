@@ -65,6 +65,7 @@
     <button appClickableButton (click)="popupAction()">Ok</button>
     <button appClickableButton (click)="popupVisibility = false">Cancel</button>
   </div>
+  <router-outlet></router-outlet>
 </div>
 <app-student-form [addFlag]="addFlag" [editFlag]="editFlag" [editedStudent]="editedStudent" (editFlagChange)="editFlag=$event"
   (addFlagChange)="addFlag=$event" [filteredStudents]="filteredStudents" (filteredStudentsChange)="filteredStudents=$event"

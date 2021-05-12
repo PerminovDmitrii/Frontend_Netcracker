@@ -14,7 +14,7 @@ export const routes: Routes = [
             },
             {
                 path: "edit/:param", component: StudentFormComponent,
-                canActivate: [TableGuard]
+                // canActivate: [TableGuard]
             },
         ],
     },
