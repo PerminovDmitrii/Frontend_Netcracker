@@ -12,12 +12,12 @@ export class ServerTableService {
     constructor(private http: HttpClient, private localTableService: LocalTableService) { }
 
     public getStudents(): void {
-        this.http.get("http://localhost:3000/students").subscribe((response: any) => {
+        this.http.get<Student[]>("http://localhost:3000/students").subscribe((response: Student[]) => {
         this.jsonHelper(response);
         });
     }
 
-    private jsonHelper(response: any): void {
+    private jsonHelper(response: Student[]): void {
         this.dataStudents = [];
         for (const studentData of response) {
             const student: Student = {

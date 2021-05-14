@@ -57,7 +57,7 @@ export class StudentFormComponent implements OnInit {
         }, [Validators.required, Validators.minLength(2), Validators.maxLength(12)]),
         birthDate: new FormGroup({
           date: new FormControl(this.editedStudent.birthDate.getDate(), [Validators.maxLength(2), Validators.max(31), Validators.min(0)]),
-          month: new FormControl(this.editedStudent.birthDate.getMonth(), [Validators.maxLength(2), Validators.max(12), Validators.min(1)]),
+          month: new FormControl(this.editedStudent.birthDate.getMonth() + 1, [Validators.maxLength(2), Validators.max(12), Validators.min(1)]),
           year: new FormControl(this.editedStudent.birthDate.getFullYear(), [Validators.maxLength(4), Validators.minLength(4),
             Validators.max(2021), Validators.min(1990)])
         }, [Validators.required]),
