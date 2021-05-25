@@ -1,13 +1,10 @@
-import { Provider } from "@angular/compiler/src/core";
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Injectable, Input, OnInit } from "@angular/core";
-import { inject } from "@angular/core/testing";
-import { ActivatedRoute, ActivatedRouteSnapshot } from "@angular/router";
-import StudentsData from "src/assets/students-list.json";
-import { StudentService } from "../student.service";
-import { LocalTableService, Student } from "./local.table.service";
-import { ServerTableService } from "./server.table.service";
-import { TableGuard } from "./table.guard";
-import { GET_STUDENTS_DATA } from "./table.providers";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { observable } from "rxjs";
+import { Student } from "../state/student.model";
+import { StudentsQuery } from "../state/students.query";
+import { StudentsService } from "../state/students.service";
+
 
 @Component({
   selector: "app-table",
@@ -44,18 +41,18 @@ export class TableComponent implements OnInit {
   public studentsListLenght: number = 0;
   public loadType: string = "";
 
-  constructor(private cd: ChangeDetectorRef, private localTableService: LocalTableService, private serverTableService: ServerTableService,
-    private snapshot: ActivatedRoute) { }
+  constructor(private cd: ChangeDetectorRef, private snapshot: ActivatedRoute, private studentsService: StudentsService, private studentsQuery: StudentsQuery) { }
 
   ngOnInit(): void {
 
     if (this.snapshot.snapshot.params["param"] === "localStore") {
-      this.filteredStudents = this.localTableService.loadStudents();
       this.loadType = this.snapshot.snapshot.params["param"];
+      this.studentsService.load(this.loadType);
+      this.studentsQuery.selectAll().subscribe(val => this.filteredStudents = val);
     }
     if (this.snapshot.snapshot.params["param"] === "serverStore") {
-      this.filteredStudents = this.serverTableService.loadStudents();
       this.loadType = this.snapshot.snapshot.params["param"];
+      this.filteredStudents = this.studentsService.load(this.loadType);
     }
   }
 
@@ -211,6 +208,7 @@ export class TableComponent implements OnInit {
     if (this.confirmDelete === true) {
       this.filteredStudents.splice(deletedStudentId, 1);
     }
+    this.studentsService.delete(deletedStudentId);
   }
 
   public popupAction(): void {

@@ -19,7 +19,7 @@
       <td>{{getBirthdate(student.birthDate)}}</td>
       <td>{{student.averageScore | averagePipe}}</td>
       <td><button appClickableButton (click)="onStudentClick(i)" [routerLink]="'edit/' + student.id" >Edit</button></td>
-      <td><button appClickableButton (click)="deleteClick(i)">Delete</button></td>
+      <td><button appClickableButton (click)="deleteClick(student.id)">Delete</button></td>
     </tr>
   </table>
 

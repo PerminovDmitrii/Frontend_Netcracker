@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { StudentsService } from "src/app/state/students.service";
 import { Student } from "src/app/table/local.table.service";
 
 export interface Value {
@@ -45,7 +46,7 @@ export class StudentFormComponent implements OnInit {
 
   studentForm!: FormGroup;
 
-  constructor( private router: Router) { }
+  constructor(private router: Router, private studentsService: StudentsService) { }
 
   ngOnInit(): void {
     if (this.editFlag === true) {
@@ -89,22 +90,7 @@ export class StudentFormComponent implements OnInit {
     this.editStudentData.midName = value.name.midName;
     this.editStudentData.birthDate = new Date(value.birthDate.year + "-" + value.birthDate.month + "-" + value.birthDate.date);
     this.editStudentData.averageScore = Number(value.averageScore);
-
-    if (this.addFlag === false) {
-      this.filteredStudents[this.editedStudent.id].lastName = value.name.lastName;
-      this.filteredStudents[this.editedStudent.id].firstName = value.name.firstName;
-      this.filteredStudents[this.editedStudent.id].midName = value.name.midName;
-      this.filteredStudents[this.editedStudent.id].birthDate = new Date(value.birthDate.year + "-" + value.birthDate.month + "-" + value.birthDate.date);
-      this.filteredStudents[this.editedStudent.id].averageScore = Number(value.averageScore);
-    } else {
-      this.editStudentData.id = this.filteredStudents.length;
-      this.editStudentData.lastName = value.name.lastName;
-      this.editStudentData.firstName = value.name.firstName;
-      this.editStudentData.midName = value.name.midName;
-      this.editStudentData.birthDate = new Date(value.birthDate.year + "-" + value.birthDate.month + "-" + value.birthDate.date);
-      this.editStudentData.averageScore = Number(value.averageScore);
-      this.filteredStudents.push(this.editStudentData);
-    }
+    this.addFlag === true ? this.studentsService.add(this.editStudentData) : this.studentsService.update(this.editStudentData);
   }
 
   onSubmit(): void {
