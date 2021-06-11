@@ -1,1 +1,16 @@
-<p>recent-products works!</p>
+<div class="recently-devices">
+    <span>Recently devices</span>
+    <hr>
+    <div class="devices-list" *ngFor="let device of recentlyDevices; let i = index">
+        <div>
+            <img src={{device.img}}>
+            <span>{{device.name}}</span>
+            <span>{{device.config}}</span>
+            <div class="rating"></div>
+            <div class="price">
+                <span>{{device.price}}</span>
+                <img src="/src/assets/addToCart.png" (click)="addRecentlyDeviceToCart(device.id)">
+            </div>    
+        </div>
+    </div>
+</div>

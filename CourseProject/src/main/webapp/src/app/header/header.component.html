@@ -1,1 +1,20 @@
-<p>header works!</p>
+<div className="header">
+    <ul class="topmenu">
+        <li><a routerLink="#" id="logo">SHOP</a></li>
+        <li><a>Catalog<i class="products"></i></a>
+          <ul class="products-submenu">
+            <li><span routerLink="products/phones">Phones</span></li>
+            <li><span routerLink="products/tablets">Tablets</span></li>
+            <li><span routerLink="products/accessories">Accessories</span></li>
+          </ul>
+        </li>
+        <li><span routerLink="info">Account</span></li>
+        <li><span>User<i class="user"></i></span>
+            <ul class="user-submenu">
+                <li><span routerLink="">Sign in</span></li> 
+                <li><span routerLink="">Register</span></li>
+            </ul>
+        </li>
+        <li><img src="/src/assets/basket.png" routerLink="basket"></li>
+      </ul>
+</div>
