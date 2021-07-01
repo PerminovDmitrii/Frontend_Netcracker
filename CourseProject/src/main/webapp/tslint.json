@@ -167,7 +167,7 @@
     "no-mergeable-namespace": true,
     "quotemark": [
       true,
-      "double"
+      "single"
     ],
     "trailing-comma": [
       true,

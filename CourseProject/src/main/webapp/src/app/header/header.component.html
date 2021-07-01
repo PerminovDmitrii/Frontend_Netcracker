@@ -1,19 +1,19 @@
 <div className="header">
     <ul class="topmenu">
-        <li><a routerLink="#" id="logo">SHOP</a></li>
-        <li><a>Catalog<i class="products"></i></a>
-          <ul class="products-submenu">
-            <li><span routerLink="products/phones">Phones</span></li>
-            <li><span routerLink="products/tablets">Tablets</span></li>
-            <li><span routerLink="products/accessories">Accessories</span></li>
-          </ul>
-        </li>
-        <li><span routerLink="info">Account</span></li>
-        <li><span>User<i class="user"></i></span>
-            <ul class="user-submenu">
-                <li><span routerLink="">Sign in</span></li> 
-                <li><span routerLink="">Register</span></li>
+        <li><a routerLink="#" class="logo">SHOP</a></li>
+        <li (click) = "isCatalogCliked = !isCatalogCliked"><a>Catalog</a>
+          <div class="catalog-dropdown" *ngIf = "isCatalogCliked">
+            <ul class="products-submenu" *ngFor = "let catElement of catElements; let i = index">
+              <li><span routerLink={{catElement.path}}>{{catElement.text}}</span></li>
             </ul>
+          </div>
+        </li>
+        <li (click) = "isUserCliked = !isUserCliked"><span>{{userName}}</span>
+          <div class="user-dropdown" *ngIf = "isUserCliked">
+              <ul class="user-submenu" *ngFor = "let userElement of userElements; let i = index">
+                  <li><span routerLink={{userElement.path}}>{{userElement.text}}</span></li> 
+              </ul>
+            </div>
         </li>
         <li><img src="/src/assets/basket.png" routerLink="basket"></li>
       </ul>
