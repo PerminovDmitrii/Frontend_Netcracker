@@ -1,13 +1,15 @@
-export class Unsigned {
-    public items = [
-        {
-            text: 'Sign in',
-            path: 'login'
-        },
+import { DropDownMenuItem } from './catalog';
 
-        {
-            text: 'Registartion',
-            path: 'register'
-        },
-    ];
-}
+export const unsigned: DropDownMenuItem[] = [
+    {
+        id: 1,
+        text: 'Sign in',
+        path: 'login'
+    },
+
+    {
+        id: 2,
+        text: 'Registartion',
+        path: 'register'
+    },
+];

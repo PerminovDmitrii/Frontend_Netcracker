@@ -10,7 +10,7 @@ import { RegistrationFormComponent } from './main/registration-form/registration
 import { UserProfileComponent } from './main/user-profile/user-profile.component';
 
 const routes: Routes = [
-  { path: '#', component: MainPageComponent },
+  { path: '', component: MainPageComponent },
   { path: 'products/:param', component: ProductsComponent },
   { path: 'productdetails/:param', component: ProductDetailsComponent },
   { path: 'login', component: LoginFormComponent },

@@ -1,8 +1,8 @@
-import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
-import { ActivatedRoute, ActivatedRouteSnapshot, RouterModule } from "@angular/router";
+import { RouterModule } from "@angular/router";
 
 import { AkitaNgDevtools } from "@datorama/akita-ngdevtools";
 import { environment } from "../environments/environment";
@@ -42,21 +42,6 @@ import { WelcomePageComponent } from "./welcome-page/welcome-page.component";
     environment.production ? [] : AkitaNgDevtools.forRoot(),
   ],
   providers: [LocalTableService, ServerTableService, TableGuard,
-    /*
-    {
-      provide: StudentService,
-      deps: [LocalTableService, ServerTableService, ActivatedRoute, HttpClient],
-      useFactory: (activatedRoute: ActivatedRoute, http: HttpClient) => {
-        if (activatedRoute.snapshot.params["param"] === "localStore") {
-          return new LocalTableService();
-        }
-        if (activatedRoute.snapshot.params["param"] === "serverStore") {
-          return new ServerTableService(http, new LocalTableService);
-        }
-        return null;
-      }
-    },
-    */
   ],
   bootstrap: [AppComponent]
 })

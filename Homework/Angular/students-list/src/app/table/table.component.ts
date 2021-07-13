@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { observable } from "rxjs";
+import { Observable, observable, Subscription } from "rxjs";
 import { Student } from "../state/student.model";
 import { StudentsQuery } from "../state/students.query";
 import { StudentsService } from "../state/students.service";
@@ -8,11 +8,11 @@ import { StudentsService } from "../state/students.service";
 
 @Component({
   selector: "app-table",
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
   templateUrl: "./table.component.html",
   styleUrls: ["./table.component.scss"],
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, OnDestroy {
 
   @Input() students: Student[] = [];
 
@@ -40,6 +40,8 @@ export class TableComponent implements OnInit {
   public editedStudent!: Student;
   public studentsListLenght: number = 0;
   public loadType: string = "";
+  public subscription!: Observable<Student[]>;
+
 
   constructor(private cd: ChangeDetectorRef, private snapshot: ActivatedRoute, private studentsService: StudentsService, private studentsQuery: StudentsQuery) { }
 
@@ -48,12 +50,18 @@ export class TableComponent implements OnInit {
     if (this.snapshot.snapshot.params["param"] === "localStore") {
       this.loadType = this.snapshot.snapshot.params["param"];
       this.studentsService.load(this.loadType);
-      this.studentsQuery.selectAll().subscribe(val => this.filteredStudents = val);
+      this.subscription = this.studentsQuery.selectAll(); // .subscribe(val => this.filteredStudents = val);
+      // this.subscription.subscribe(val => this.filteredStudents = val);
+
     }
     if (this.snapshot.snapshot.params["param"] === "serverStore") {
       this.loadType = this.snapshot.snapshot.params["param"];
       this.filteredStudents = this.studentsService.load(this.loadType);
     }
+  }
+
+  ngOnDestroy(): void {
+    // this.subscription.unsubscribe();
   }
 
 

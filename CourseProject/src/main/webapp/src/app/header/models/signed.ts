@@ -1,13 +1,15 @@
-export class Signed {
-    public items = [
-        {
-            text: 'Profile',
-            path: 'info'
-        },
+import { DropDownMenuItem } from './catalog';
 
-        {
-            text: 'Log out',
-            path: '#'
-        },
-    ];
-}
+export const signed: DropDownMenuItem[] = [
+    {
+        id: 1,
+        text: 'Profile',
+        path: 'info'
+    },
+
+    {
+        id: 2,
+        text: 'Log out',
+        path: '#'
+    },
+];

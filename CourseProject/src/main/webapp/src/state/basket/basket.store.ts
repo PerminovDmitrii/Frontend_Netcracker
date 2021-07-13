@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
-import { Product } from './basket.model';
+import { Product } from '../product.model';
 
 export interface BasketState extends EntityState<Product[]> {}
 

@@ -9,7 +9,7 @@
       <th appClickableButton (click)="sortBy('birthDate')">Date of birth</th>
       <th appClickableButton (click)="sortBy('averageScore')">Average score</th>
     </tr>
-    <tr appHighlightStudent *ngFor="let student of filteredStudents; let i = index" [ngClass]="{scoreThree: isThreeScore(student) && threeScoreFlag === true,
+    <tr appHighlightStudent *ngFor="let student of (subscription | async); let i = index" [ngClass]="{scoreThree: isThreeScore(student) && threeScoreFlag === true,
     averageHighlight: highlightStudentsBy(student)}">
       <td>{{i + 1}}</td>
       <td>{{student.id}}</td>

@@ -1,33 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { Catalog, DropDownMenuItem } from './models/catalog';
-import { Signed } from './models/signed';
-import { Unsigned } from './models/unsigned';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { catalog, DropDownMenuItem } from './models/catalog';
+import { signed } from './models/signed';
+import { unsigned } from './models/unsigned';
 
 @Component({
   selector: 'app-header',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.less']
 })
 export class HeaderComponent implements OnInit {
 
-  catElements: DropDownMenuItem[];
-  signElements: DropDownMenuItem[];
-  unsignElements: DropDownMenuItem[];
-  userElements: DropDownMenuItem[];
-  isCatalogCliked: boolean = false;
-  isUserCliked: boolean = false;
+  catElements: DropDownMenuItem[]; /** @internal */
+  signElements: DropDownMenuItem[]; /** @internal */
+  unsignElements: DropDownMenuItem[]; /** @internal */
+  userElements: DropDownMenuItem[]; /** @internal */
+  isCatalogCliked: boolean = false; /** @internal */
+  isUserCliked: boolean = false; /** @internal */
 
-  isUserLoged: boolean = false; // пернести в стор
-  userName: string = 'Account';
+  private isUserLoged: boolean = false; // в стор
+  userName: string = 'Account'; // в стор
 
-  constructor(private catalog: Catalog, private signed: Signed, private unsigned: Unsigned) {
-    this.catElements = this.catalog.items;
-    this.signElements = this.signed.items;
-    this.unsignElements = this.unsigned.items;
-    this.userElements = this.unsigned.items;
+  constructor() {
+    this.catElements = catalog;
+    this.signElements = signed;
+    this.unsignElements = unsigned;
+    this.userElements = unsigned;
   }
 
   ngOnInit(): void {
+  }
+
+  checkUserClick(): void {
+    this.isUserCliked = !this.isUserCliked;
+  }
+
+  checkCatalogClick(): void {
+    this.isCatalogCliked = !this.isCatalogCliked;
+  }
+
+  trackByFn(index: number, elem: DropDownMenuItem): number {
+    return elem.id;
   }
 
 }

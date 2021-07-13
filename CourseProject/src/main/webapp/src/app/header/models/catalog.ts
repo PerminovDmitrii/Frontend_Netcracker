@@ -1,23 +1,25 @@
-export class Catalog {
-    public items: DropDownMenuItem[] = [
-        {
-            text: 'Phones',
-            path: 'products/phones'
-        },
+export const catalog: DropDownMenuItem[] = [
+    {
+        id: 1,
+        text: 'Phones',
+        path: 'products/phones'
+    },
 
-        {
-            text: 'Tablets',
-            path: 'products/tablets'
-        },
+    {
+        id: 2,
+        text: 'Tablets',
+        path: 'products/tablets'
+    },
 
-        {
-            text: 'Accessories',
-            path: 'products/accessories'
-        },
-    ];
-}
+    {
+        id: 3,
+        text: 'Accessories',
+        path: 'products/accessories'
+    },
+];
 
 export interface DropDownMenuItem {
+        id: number;
         text: string;
         path: string;
 }

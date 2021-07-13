@@ -1,18 +1,19 @@
 import { Item } from './contacts';
 
-export class SocialNetworks {
-    public items: Item[] = [
-        {
-            href: 'https://www.facebook.com/',
-            imgSrc: '/src/assets/facebook.png',
-        },
-        {
-            href: 'https://www.instagram.com/',
-            imgSrc: '/src/assets/instagram.png'
-        },
-        {
-            href: 'https://www.twitter.com/',
-            imgSrc: '/src/assets/twitter.png'
-        },
-    ];
-}
+export const socialNetworks: Item[] = [
+    {
+        id: 1,
+        href: 'https://www.facebook.com/',
+        imgSrc: '/src/assets/facebook.png',
+    },
+    {
+        id: 2,
+        href: 'https://www.instagram.com/',
+        imgSrc: '/src/assets/instagram.png'
+    },
+    {
+        id: 3,
+        href: 'https://www.twitter.com/',
+        imgSrc: '/src/assets/twitter.png'
+    },
+];

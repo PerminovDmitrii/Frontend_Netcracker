@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { Contacts } from '../footer/models/contacts';
 import { AuthorizationSuccessComponent } from './authorization-success/authorization-success.component';
 import { BasketComponent } from './basket/basket.component';
 import { LoginFormComponent } from './login-form/login-form.component';

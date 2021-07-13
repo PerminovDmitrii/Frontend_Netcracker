@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-authorization-success',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './authorization-success.component.html',
   styleUrls: ['./authorization-success.component.less']
 })

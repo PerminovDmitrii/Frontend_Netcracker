@@ -14,7 +14,7 @@ const initialState = {
   providedIn: "root"
 })
 @StoreConfig({ name: "students" })
-export class StudentsStore extends EntityStore<StudentsState> {
+export class StudentsStore extends EntityStore<StudentsState, Student> {
   constructor() {
     super(initialState);
   }

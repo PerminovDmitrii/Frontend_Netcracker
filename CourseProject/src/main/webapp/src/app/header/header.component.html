@@ -1,16 +1,16 @@
 <div className="header">
     <ul class="topmenu">
-        <li><a routerLink="#" class="logo">SHOP</a></li>
-        <li (click) = "isCatalogCliked = !isCatalogCliked"><a>Catalog</a>
+        <li><a routerLink="" class="logo">SHOP</a></li>
+        <li (click) = "checkCatalogClick()"><a>Catalog</a>
           <div class="catalog-dropdown" *ngIf = "isCatalogCliked">
-            <ul class="products-submenu" *ngFor = "let catElement of catElements; let i = index">
+            <ul class="products-submenu" *ngFor = "let catElement of catElements; let i = index; trackBy: trackByFn">
               <li><span routerLink={{catElement.path}}>{{catElement.text}}</span></li>
             </ul>
           </div>
         </li>
-        <li (click) = "isUserCliked = !isUserCliked"><span>{{userName}}</span>
+        <li (click) = "checkUserClick()"><span>{{userName}}</span>
           <div class="user-dropdown" *ngIf = "isUserCliked">
-              <ul class="user-submenu" *ngFor = "let userElement of userElements; let i = index">
+              <ul class="user-submenu" *ngFor = "let userElement of userElements; let i = index; trackBy: trackByFn">
                   <li><span routerLink={{userElement.path}}>{{userElement.text}}</span></li> 
               </ul>
             </div>

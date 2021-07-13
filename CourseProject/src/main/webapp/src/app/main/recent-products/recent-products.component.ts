@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/state/products/products.model';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Product } from 'src/state/product.model';
 
 @Component({
   selector: 'app-recent-products',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './recent-products.component.html',
   styleUrls: ['./recent-products.component.less']
 })

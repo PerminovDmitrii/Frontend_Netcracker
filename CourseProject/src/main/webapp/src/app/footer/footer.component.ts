@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Contacts, Item } from './models/contacts';
-import { SocialNetworks } from './models/social-networks';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { contacts, Item } from './models/contacts';
+import { socialNetworks } from './models/social-networks';
 
 @Component({
   selector: 'app-footer',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.less']
 })
@@ -12,9 +13,9 @@ export class FooterComponent implements OnInit {
   contactsElements: Item[];
   socialNetworksElements: Item[];
 
-  constructor(private contacts: Contacts, private socialNetworks: SocialNetworks) {
-    this.contactsElements = contacts.items;
-    this.socialNetworksElements = socialNetworks.items;
+  constructor() {
+    this.contactsElements = contacts;
+    this.socialNetworksElements = socialNetworks;
   }
 
   ngOnInit(): void {
