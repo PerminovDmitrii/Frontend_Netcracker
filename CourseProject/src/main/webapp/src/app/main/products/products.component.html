@@ -1,5 +1,5 @@
 <div class="products">
-    <span>{{productType}}</span>
+    <span class="category">{{productType$ | async}}</span>
     <hr>
     <div class="filter-panel">
         <div class="dropdown" id="dropdown-sort"></div>
@@ -10,5 +10,8 @@
         </div>  
     </div>
     <div class="actual-filter"></div>
-    <div class="actual-products"></div>
+    <div class="actual-products">
+        <app-quick-view *ngFor = "let product of products$ | async; let i = index; trackBy: trackByFn"
+        [product]="product" routerLink="productdetails/`${product.id}`"></app-quick-view>
+    </div>
 </div>

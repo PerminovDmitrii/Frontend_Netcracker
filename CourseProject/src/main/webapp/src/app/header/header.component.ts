@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ProductsStoreService } from 'src/state/products/products.store.service';
 import { catalog, DropDownMenuItem } from './models/catalog';
 import { signed } from './models/signed';
 import { unsigned } from './models/unsigned';
@@ -21,7 +22,7 @@ export class HeaderComponent implements OnInit {
   private isUserLoged: boolean = false; // в стор
   userName: string = 'Account'; // в стор
 
-  constructor() {
+  constructor(private productsStoreService: ProductsStoreService) {
     this.catElements = catalog;
     this.signElements = signed;
     this.unsignElements = unsigned;
@@ -41,6 +42,11 @@ export class HeaderComponent implements OnInit {
 
   trackByFn(index: number, elem: DropDownMenuItem): number {
     return elem.id;
+  }
+
+  setProductsType(category: string): void {
+    this.productsStoreService.updateProductsType(category.slice(9));
+    this.productsStoreService.updateProducts(category.slice(9));
   }
 
 }

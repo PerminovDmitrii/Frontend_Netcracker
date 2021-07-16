@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { Product } from 'src/state/product.model';
 
 @Component({
   selector: 'app-quick-view',
@@ -8,7 +9,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class QuickViewComponent implements OnInit {
 
-  constructor() { }
+  @Input() product: any;
 
   ngOnInit(): void {
   }

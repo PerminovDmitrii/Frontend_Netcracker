@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Product } from 'src/state/product.model';
+import { ProductsQuery } from 'src/state/products/products.query';
 import { ProductsStoreService } from 'src/state/products/products.store.service';
-import { ProductsService } from './products.service';
+// import { ProductsService } from './products.service';
 
 @Component({
   selector: 'app-products',
@@ -9,16 +12,18 @@ import { ProductsService } from './products.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.less']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
 
-  public productType: string = '';
+  public productType$: Observable<string>;
+  public products$: Observable<Product[]>;
 
-  constructor(private activatedRoute: ActivatedRoute, private productsStoreService: ProductsStoreService,
-    private productService: ProductsService) { }
+  constructor(private activatedRoute: ActivatedRoute, private productsStoreService: ProductsStoreService, private productsQuery: ProductsQuery) {
+    // this.productsStoreService.updateProductsType(this.activatedRoute.snapshot.params['param']);
+    this.productType$ = productsQuery.productsType$;
+    this.products$ = productsQuery.allProducts$;
+  }
 
-  ngOnInit(): void {
-    this.productType = this.activatedRoute.snapshot.params['param'];
-    // this.productsStoreService.loadHttp(this.productType);
-    this.productsStoreService.getData(this.productType);
+  trackByFn(index: number, elem: Product): number {
+    return elem.id;
   }
 }

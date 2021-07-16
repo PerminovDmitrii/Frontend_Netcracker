@@ -4,7 +4,7 @@
         <li (click) = "checkCatalogClick()"><a>Catalog</a>
           <div class="catalog-dropdown" *ngIf = "isCatalogCliked">
             <ul class="products-submenu" *ngFor = "let catElement of catElements; let i = index; trackBy: trackByFn">
-              <li><span routerLink={{catElement.path}}>{{catElement.text}}</span></li>
+              <li (click)="setProductsType(catElement.path)"><span routerLink={{catElement.path}}>{{catElement.text}}</span></li>
             </ul>
           </div>
         </li>
