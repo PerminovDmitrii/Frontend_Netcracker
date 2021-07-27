@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { BasketQuery } from 'src/state/basket/basket.query';
+import { Product } from 'src/state/product.model';
 
 @Component({
   selector: 'app-basket',
@@ -6,11 +9,21 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   templateUrl: './basket.component.html',
   styleUrls: ['./basket.component.less']
 })
-export class BasketComponent implements OnInit {
+export class BasketComponent {
 
-  constructor() { }
+  public products$: Observable<Product[]>;
+  public basketCount: number;
 
-  ngOnInit(): void {
+  constructor(private basketQuery: BasketQuery) {
+    this.products$ = this.basketQuery.allProducts$;
+    this.basketCount = this.basketQuery.basketCount;
   }
 
+  isBasketEmpty(): boolean {
+    return this.basketCount === 0 ? false : true;
+  }
+
+  trackByFn(index: number, elem: Product): number {
+    return elem.id;
+  }
 }

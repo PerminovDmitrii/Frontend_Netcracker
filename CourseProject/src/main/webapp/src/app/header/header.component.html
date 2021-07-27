@@ -1,20 +1,26 @@
-<div className="header">
-    <ul class="topmenu">
-        <li><a routerLink="" class="logo">SHOP</a></li>
-        <li (click) = "checkCatalogClick()"><a>Catalog</a>
-          <div class="catalog-dropdown" *ngIf = "isCatalogCliked">
-            <ul class="products-submenu" *ngFor = "let catElement of catElements; let i = index; trackBy: trackByFn">
-              <li (click)="setProductsType(catElement.path)"><span routerLink={{catElement.path}}>{{catElement.text}}</span></li>
-            </ul>
-          </div>
-        </li>
-        <li (click) = "checkUserClick()"><span>{{userName}}</span>
-          <div class="user-dropdown" *ngIf = "isUserCliked">
-              <ul class="user-submenu" *ngFor = "let userElement of userElements; let i = index; trackBy: trackByFn">
-                  <li><span routerLink={{userElement.path}}>{{userElement.text}}</span></li> 
-              </ul>
-            </div>
-        </li>
-        <li><img src="/src/assets/basket.png" routerLink="basket"></li>
-      </ul>
+<div class="header">
+  <div class="left-content">
+    <a class="logo" routerLink="">SHOP</a>
+  </div>
+  <div class="mid-content">
+    <div class="catalog active-element" (click) = "checkCatalogClick()"><a>Catalog</a>
+      <div class="catalog-dropdown" *ngIf = "isCatalogCliked">
+        <ul class="submenu" *ngFor = "let catElement of catElements; let i = index; trackBy: headerService.trackByFn">
+          <li class="dropdown-element active-element" (click)="setProductsType(catElement.path)"><a routerLink={{catElement.path}}>{{catElement.text}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="right-content">
+    <div class="account active-element" (click) = "checkUserClick()"><a >{{userName}}</a>
+      <div class="user-dropdown" *ngIf = "isUserCliked">
+          <ul class="submenu" *ngFor = "let userElement of userElements; let i = index; trackBy: headerService.trackByFn">
+              <li class="dropdown-element active-element"><a routerLink={{userElement.path}}>{{userElement.text}}</a></li> 
+          </ul>
+      </div>
+    </div>
+    <div class="basket active-element" routerLink="basket">
+      <img src="/assets/basket.png" alt="basket">
+    </div>
+  </div>
 </div>

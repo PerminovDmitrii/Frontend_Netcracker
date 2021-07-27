@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { HeaderService } from './header/header.service';
 import { MainModule } from './main/main.module';
 
 @NgModule({
@@ -26,7 +27,7 @@ import { MainModule } from './main/main.module';
     BrowserAnimationsModule,
     HttpClientModule,
   ],
-  providers: [ProductsStoreService],
+  providers: [ProductsStoreService, HeaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,7 +9,7 @@ import { Product } from 'src/state/product.model';
 })
 export class QuickViewComponent implements OnInit {
 
-  @Input() product: any;
+  @Input() product!: Product;
 
   ngOnInit(): void {
   }

@@ -1,0 +1,138 @@
+@background-color: #0F0F0F;
+@background-color-hover: #1F1F1F;
+@border-hover: 1px solid rgba(128, 128, 128, 0.1);
+@font-style: PT Sans;
+@text-color-nohover: #969696;
+@text-color-hover: #FFFFFF;
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    background-color: @background-color;
+    height: 80px;
+    z-index: 1;
+}
+
+.left-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+}
+
+.mid-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.catalog {
+    width: 120px;
+    height: 80px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.account {
+    width: 120px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.basket {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.basket img {
+    max-width: 100%;
+}
+
+.header .active-element:hover, .active-element:hover a {
+    background: @background-color-hover;
+    border: @border-hover;
+    box-sizing: border-box;
+    color: @text-color-hover;
+}
+
+.header a {
+    font-family: @font-style;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    text-transform: uppercase;
+    color: @text-color-nohover;
+    text-decoration: none;
+}
+
+.header a.logo {
+    font-family: Post No Bills Jaffna;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 54px;
+    color: @text-color-hover;
+}
+
+// .submenu {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     position: absolute;
+//     z-index: 50;
+// }
+
+// .catalog-dropdown {
+//     position: absolute;
+//     left: 50%;
+//     top: 50%;
+//     transform: translate(-50%, -50%);
+//     z-index: 1001;
+//     background-color: rgb(212, 238, 247);
+//     border: 2px solid rgb(0, 0, 0);
+//     padding: 10px;
+// }
+
+// .submenu {
+//     position: relative;
+//     left: 50%;
+//     top: 50%;
+//     transform: translate(-50%, -50%);
+//     z-index: 1001;
+//     background-color: rgb(212, 238, 247);
+//     border: 2px solid rgb(0, 0, 0);
+//     padding: 10px;
+// }
+.catalog-dropdown {
+    display: block;
+    // flex-flow: column nowrap;
+    z-index: 1000;
+}
+
+.submenu {
+    display: block;
+    flex-flow: column nowrap;
+    z-index: 1001;
+}
+
+.dropdown-element {
+    flex: 1;
+    list-style: none;
+}

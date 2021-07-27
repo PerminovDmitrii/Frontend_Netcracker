@@ -1,0 +1,73 @@
+@background-color: #000000;
+@title-color: #FFFFFF;
+@filter-panel-color: #191B1C;
+
+.products {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    background-color: @background-color;
+
+    .title {
+        font-family: Playfair Display;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 36px;
+        line-height: 48px;
+        text-align: center;
+        text-transform: uppercase;
+        color: @title-color;
+        margin-top: 50px;
+
+        hr {
+            width: 120px;
+        }
+    }
+
+    .filter-panel {
+        flex: 1;
+        display: flex;
+        flex-flow: row wrap;
+
+        .dropdown-sort {
+            flex: 1;
+        }
+
+        .dropdown-filter {
+            flex: 1;
+        }
+
+        .search {
+            flex: 2;
+            display: flex;
+            flex-flow: row nowrap;
+            width: 260px;
+            height: 30px;
+            background-color: @filter-panel-color;
+            align-items: center;
+
+            
+            input {
+                margin-right: 20px;
+                background-color: @filter-panel-color;
+                border: none;
+            }
+
+            img {
+                width: 15px;
+                height: 15px;
+                margin-right: 10px;
+            }
+        }
+    }
+
+    .actual-products {
+        flex: 1;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: center;
+        max-width: 80%;
+    }
+}

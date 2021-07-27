@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { AuthorizationSuccessComponent } from './authorization-success/authorization-success.component';
 import { BasketComponent } from './basket/basket.component';
 import { LoginFormComponent } from './login-form/login-form.component';
@@ -11,8 +13,6 @@ import { QuickViewComponent } from './quick-view/quick-view.component';
 import { RecentProductsComponent } from './recent-products/recent-products.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-
-
 
 @NgModule({
   declarations: [
@@ -30,6 +30,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    RouterModule,
   ]
 })
 export class MainModule { }

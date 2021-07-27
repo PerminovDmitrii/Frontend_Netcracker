@@ -23,3 +23,22 @@ export interface TechSpec {
     name: string;
     value: string;
 }
+
+export enum PRODUCTS_TYPES {
+    phones = 'phones',
+    tablets = 'tablets',
+    accessories = 'accessories'
+}
+
+export enum SortTypes {
+    byLowRate,
+    byHighRate,
+    byLowPopular,
+    byHighPopular,
+    byLowPrice,
+    byHighPrice,
+    byLowAlphabet,
+    byHighAlphabet,
+    byDefault
+}
+

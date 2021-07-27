@@ -1,0 +1,40 @@
+@background-color: #0F0F0F;
+@text-color: #969696;
+
+.footer {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    background-color: @background-color;
+    height: 80px;
+
+    .connect {
+        display: flex;
+        flex-flow: column nowrap;
+        flex: 1 1 200px;
+        align-items: center;
+        justify-content: center;
+
+        a {
+            color: @text-color;
+            text-decoration: none;
+        }
+
+        img {
+            margin-left: 10px;
+        }
+    }
+
+    .socials {
+        display: flex;
+        flex-flow: row nowrap;
+        flex: 1 1 200px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    a {
+        margin-left: 20px;
+    }
+}

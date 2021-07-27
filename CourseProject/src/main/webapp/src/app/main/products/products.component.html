@@ -1,17 +1,30 @@
 <div class="products">
-    <span class="category">{{productType$ | async}}</span>
-    <hr>
-    <div class="filter-panel">
-        <div class="dropdown" id="dropdown-sort"></div>
-        <div class="dropdown" id="dropdown-filter"></div>
-        <div class="search">
-            <input type="text" placeholder="Search">
-            <img src="/src/assets/addToCart.png">
-        </div>  
+    <div class="title">
+        <span class="category">{{productType$ | async}}</span>
+        <hr>
     </div>
-    <div class="actual-filter"></div>
+    <div class="filter-panel">
+        <div class="dropdown-sort" id="dropdown-sort">
+            <!-- <mat-form-field appearance="fill">
+                <mat-label>Choose an option</mat-label>
+                <select matNativeControl [disabled]="disableSelect.value">
+                  <option value="" selected></option>
+                  <option value="volvo">Volvo</option>
+                  <option value="saab" disabled>Saab</option>
+                  <option value="mercedes">Mercedes</option>
+                  <option value="audi">Audi</option>
+                </select>
+              </mat-form-field> -->
+        </div>
+        <div class="dropdown-filter" id="dropdown-filter"></div>
+        <div class="search">
+            <input type="text" class="filter-input" placeholder="   Search" [(ngModel)]="filterValue" (change)="filterProductsByName()">
+            <img src="/assets/search.png">
+        </div> 
+    </div>
+    <div class="actual-filter"></div> 
     <div class="actual-products">
-        <app-quick-view *ngFor = "let product of products$ | async; let i = index; trackBy: trackByFn"
-        [product]="product" routerLink="productdetails/`${product.id}`"></app-quick-view>
+        <app-quick-view class="quick-view-product" *ngFor = "let product of products$ | async; let i = index; trackBy: trackByFn"
+        [product]="product" [routerLink]="['/productdetails/', product.id]" routerLinkActive="router-link-active"></app-quick-view>
     </div>
 </div>

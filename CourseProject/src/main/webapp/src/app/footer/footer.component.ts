@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { HeaderService } from '../header/header.service';
 import { contacts, Item } from './models/contacts';
 import { socialNetworks } from './models/social-networks';
 
@@ -13,7 +14,7 @@ export class FooterComponent implements OnInit {
   contactsElements: Item[];
   socialNetworksElements: Item[];
 
-  constructor() {
+  constructor(public headerService: HeaderService) {
     this.contactsElements = contacts;
     this.socialNetworksElements = socialNetworks;
   }

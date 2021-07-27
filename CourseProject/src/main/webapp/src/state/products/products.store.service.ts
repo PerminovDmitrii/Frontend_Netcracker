@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { setEntities } from '@datorama/akita';
-import { Observable } from 'rxjs';
 import { accessories } from 'src/assets/data/accessories';
 import { phones } from 'src/assets/data/phones';
 import { tablets } from 'src/assets/data/tablets';
@@ -41,5 +39,18 @@ export class ProductsStoreService {
 
   updateProductsType(category: string): void {
     this.productsStore.update({productType: category});
+  }
+
+  updateProductsBrands(products: Product[]): void {
+    this.productsStore.update({productsBrands: this.getBrands(products)});
+  }
+
+  getBrands(products: Product[]): Array<String> {
+    const brands: Array<String> = [];
+    products.map( product => {
+      brands.push(product.brand);
+    });
+    const setOfBrands = new Set(brands);
+    return Array.from(setOfBrands);
   }
 }
