@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { BasketService } from 'src/state/basket/basket.service';
 import { Product } from 'src/state/product.model';
 
 @Component({
@@ -7,11 +8,15 @@ import { Product } from 'src/state/product.model';
   templateUrl: './quick-view.component.html',
   styleUrls: ['./quick-view.component.less']
 })
-export class QuickViewComponent implements OnInit {
+export class QuickViewComponent {
 
   @Input() product!: Product;
 
-  ngOnInit(): void {
-  }
+  constructor(private basketService: BasketService) { }
 
+  addToCart(): void {
+    this.basketService.addProduct(this.product);
+    this.basketService.updateBasketEmpty(false);
+    this.basketService.updateTotalPrice(this.product.price);
+  }
 }

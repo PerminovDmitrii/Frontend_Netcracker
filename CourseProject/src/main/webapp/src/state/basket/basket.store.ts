@@ -4,10 +4,12 @@ import { Product } from '../product.model';
 
 export interface BasketState extends EntityState<Product> {
   totalPrice: number;
+  isBasketEmpty: boolean;
 }
 
 const initialState: BasketState = {
     totalPrice: 0,
+    isBasketEmpty: true,
 };
 
 @Injectable({

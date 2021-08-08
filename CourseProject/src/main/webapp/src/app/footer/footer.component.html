@@ -1,6 +1,6 @@
 <div class="footer">
     <div class="connect">
-        <div *ngFor = "let contactsElement of contactsElements; let i = index; trackBy: headerService.trackByFn">
+        <div class="coonect-item" *ngFor = "let contactsElement of contactsElements; let i = index; trackBy: headerService.trackByFn">
             <img src={{contactsElement.imgSrc}}>
             <a href={{contactsElement.href}}>{{contactsElement.text}}</a>
         </div>

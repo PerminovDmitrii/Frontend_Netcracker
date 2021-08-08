@@ -26,8 +26,8 @@ export class ProductDetailsComponent {
   addToBasket(): void {
     if (this.product) {
       this.basketService.addProduct(this.product);
+      this.basketService.updateBasketEmpty(false);
+      this.basketService.updateTotalPrice(this.product.price);
     }
-
   }
-
 }

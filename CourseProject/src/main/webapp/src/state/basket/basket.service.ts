@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { removeEntities } from '@datorama/akita';
 import { Product } from '../product.model';
 import { BasketStore } from './basket.store';
 
@@ -13,5 +14,17 @@ export class BasketService {
 
   removeProduct(id: number): void {
       this.basketStore.remove(id);
+  }
+
+  updateBasketEmpty(value: boolean): void {
+    this.basketStore.update({isBasketEmpty: value});
+  }
+
+  updateTotalPrice(price: number): void {
+    this.basketStore.update({totalPrice: price});
+  }
+
+  clearBasket(): void {
+    this.basketStore.remove();
   }
 }

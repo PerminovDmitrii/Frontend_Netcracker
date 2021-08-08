@@ -18,8 +18,8 @@ export class HeaderComponent implements OnInit {
   signElements: DropDownMenuItem[]; /** @internal */
   unsignElements: DropDownMenuItem[]; /** @internal */
   userElements: DropDownMenuItem[]; /** @internal */
-  isCatalogCliked: boolean = false; /** @internal */
-  isUserCliked: boolean = false; /** @internal */
+  isCatalogClicked: boolean = false; /** @internal */
+  isUserClicked: boolean = false; /** @internal */
 
   private isUserLoged: boolean = false; // в стор
   userName: string = 'Account'; // в стор
@@ -35,11 +35,11 @@ export class HeaderComponent implements OnInit {
   }
 
   checkUserClick(): void {
-    this.isUserCliked = !this.isUserCliked;
+    this.isUserClicked = !this.isUserClicked;
   }
 
   checkCatalogClick(): void {
-    this.isCatalogCliked = !this.isCatalogCliked;
+    this.isCatalogClicked = !this.isCatalogClicked;
   }
 
   setProductsType(category: string): void {

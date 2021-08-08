@@ -1,0 +1,13 @@
+<div class="quick-view">
+    <div class="image">
+        <img src={{product.img}} alt="product img">
+    </div>
+    <div class="spec">
+        <span class="name">{{product.name}}</span>
+        <span class="config">{{product.config}}</span>
+    </div>
+    <div class="price">
+        <span class="price-value">{{product.price}} RUB</span>
+        <img src="/assets/delete.png" alt="delete item from cart" (click)="removeProduct()">
+    </div>
+</div>

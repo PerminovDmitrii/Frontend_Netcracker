@@ -1,0 +1,57 @@
+@background-color: #C4C4C4;
+
+
+    .empty-basket {
+        background-color: @background-color;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-around;
+        align-items: center;
+
+        img {
+            flex: 1;
+            margin-top: 20px;
+        }
+
+        span {
+            flex: 1;
+            margin-top: 20px;
+            text-transform: uppercase;
+            font-family: PT Sans;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 36px;
+            line-height: 47px;
+            text-align: center;
+            color: #808080;
+        }
+
+        button {
+            flex: 1;
+            margin-top: 20px;
+            width: 299px;
+            height: 72px;
+            background: #C4C4C4;
+            border: 3px solid #1F1F1F;
+
+            font-family: PT Sans;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 24px;
+            line-height: 31px;
+            text-align: center;
+            text-transform: uppercase;
+
+            color: #000000;
+
+            margin-bottom: 10px;
+
+        }
+    }
+
+    .not-empty-basket {
+        background-color: @background-color;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: stretch;
+    }

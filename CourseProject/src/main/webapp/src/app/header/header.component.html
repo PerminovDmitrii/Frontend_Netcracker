@@ -4,7 +4,7 @@
   </div>
   <div class="mid-content">
     <div class="catalog active-element" (click) = "checkCatalogClick()"><a>Catalog</a>
-      <div class="catalog-dropdown" *ngIf = "isCatalogCliked">
+      <div class="catalog-dropdown" *ngIf = "isCatalogClicked">
         <ul class="submenu" *ngFor = "let catElement of catElements; let i = index; trackBy: headerService.trackByFn">
           <li class="dropdown-element active-element" (click)="setProductsType(catElement.path)"><a routerLink={{catElement.path}}>{{catElement.text}}</a></li>
         </ul>
@@ -13,7 +13,7 @@
   </div>
   <div class="right-content">
     <div class="account active-element" (click) = "checkUserClick()"><a >{{userName}}</a>
-      <div class="user-dropdown" *ngIf = "isUserCliked">
+      <div class="user-dropdown" *ngIf = "isUserClicked">
           <ul class="submenu" *ngFor = "let userElement of userElements; let i = index; trackBy: headerService.trackByFn">
               <li class="dropdown-element active-element"><a routerLink={{userElement.path}}>{{userElement.text}}</a></li> 
           </ul>

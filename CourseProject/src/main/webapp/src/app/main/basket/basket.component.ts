@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BasketQuery } from 'src/state/basket/basket.query';
+import { BasketService } from 'src/state/basket/basket.service';
 import { Product } from 'src/state/product.model';
+import { MainService } from '../main.service';
 
 @Component({
   selector: 'app-basket',
@@ -12,18 +14,19 @@ import { Product } from 'src/state/product.model';
 export class BasketComponent {
 
   public products$: Observable<Product[]>;
-  public basketCount: number;
+  public totalPrice$: Observable <number>;
 
-  constructor(private basketQuery: BasketQuery) {
+  constructor(public basketQuery: BasketQuery, private basketService: BasketService, public mainService: MainService) {
     this.products$ = this.basketQuery.allProducts$;
-    this.basketCount = this.basketQuery.basketCount;
+    this.totalPrice$ = this.basketQuery.totalPrice$;
   }
 
-  isBasketEmpty(): boolean {
-    return this.basketCount === 0 ? false : true;
+  isBasketEmptyCheck(): Observable<boolean> {
+    return this.basketQuery.isBasketEmpty$;
   }
 
-  trackByFn(index: number, elem: Product): number {
-    return elem.id;
+  clearBasket(): void {
+    this.basketService.clearBasket();
+    this.basketService.updateBasketEmpty(true);
   }
 }
