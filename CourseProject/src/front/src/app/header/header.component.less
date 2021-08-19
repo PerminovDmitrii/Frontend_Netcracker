@@ -44,14 +44,17 @@
     flex-flow: column nowrap;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .account {
     width: 120px;
     height: 80px;
     display: flex;
+    flex-flow: column nowrap;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .basket {
@@ -101,8 +104,8 @@
 
 // .catalog-dropdown {
 //     position: absolute;
-//     left: 50%;
-//     top: 50%;
+//     left: 0;
+//     top: 80px;
 //     transform: translate(-50%, -50%);
 //     z-index: 1001;
 //     background-color: rgb(212, 238, 247);
@@ -124,15 +127,36 @@
     display: block;
     // flex-flow: column nowrap;
     z-index: 1000;
+    position: absolute;
+    top: 100%;
+    left: 0%;
+    background-color: @background-color-hover;
+    border: @border-hover;
 }
 
 .submenu {
     display: block;
-    flex-flow: column nowrap;
-    z-index: 1001;
+    // align-content: center;
+//     flex-flow: column nowrap;
+//     align-items: center;
+//     justify-content: center;
 }
 
 .dropdown-element {
     flex: 1;
+    display: flex;
+    justify-content: flex-start;
     list-style: none;
+    margin-right: 30px;
+}
+
+.user-dropdown {
+    display: block;
+    // flex-flow: column nowrap;
+    z-index: 1000;
+    position: absolute;
+    top: 100%;
+    left: 0%;
+    background-color: @background-color-hover;
+    border: @border-hover;
 }
