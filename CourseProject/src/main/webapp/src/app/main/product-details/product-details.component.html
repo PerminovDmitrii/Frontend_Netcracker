@@ -1,0 +1,39 @@
+<div class="product" *ngIf="product">
+    <div class="short-details">
+        <img src={{product.img}} alt="product">
+        <div class="short-information">
+            <span class="name">{{product.name}}</span>
+            <span class="config">{{product.config}}</span>
+            <div class="star-rating"></div>
+            <p class="description">{{product.description}}</p>
+            <span class="price">{{product.price}} RUB</span>
+        </div>
+    </div>
+    <div class="tec-spec">TECNICAL SPECIFICATION
+        <div class="OS">
+            <span>OPERATION SYSTEM</span>
+            <span>{{getProductSpec('Operating system')}}</span>
+        </div>
+        <div class="display">
+            <span>DISPLAY</span>
+            <span>{{getProductSpec('Dispaly')}}</span>
+        </div>
+        <div class="dispRes">
+            <span>DISPALY RESOLUTION</span>
+            <span>{{getProductSpec('Dispaly resolution')}}</span>
+        </div>
+        <div class="processor">
+            <span>PROCESSOR</span>
+            <span>{{getProductSpec('Processor')}}</span>
+        </div>
+        <div class="intMemory">
+            <span>INTERNAL MEMORY</span>
+            <span>{{getProductSpec('Internal memory')}}</span>
+        </div>
+        <div class="weight">
+            <span>WEIGHT</span>
+            <span>{{getProductSpec('Weight')}}</span>
+        </div>
+    </div>
+    <button (click)="addToBasket()">ADD TO BASKET</button>
+</div>
