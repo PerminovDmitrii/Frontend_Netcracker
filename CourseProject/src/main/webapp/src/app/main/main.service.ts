@@ -17,7 +17,7 @@ export class MainService {
 
   decreaseTotalPrice(price: number): void {
     const total: number = this.basketQuery.totalPrice;
-    this.basketService.updateTotalPrice(total - price);
+    this.basketService.updateTotalPrice(price);
   }
 
   trackByFn(index: number, elem: Product): number {

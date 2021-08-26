@@ -14,9 +14,10 @@ export class QuickViewComponent {
 
   constructor(private basketService: BasketService) { }
 
-  addToCart(): void {
+  addToCart($event: MouseEvent): void {
     this.basketService.addProduct(this.product);
     this.basketService.updateBasketEmpty(false);
     this.basketService.updateTotalPrice(this.product.price);
+    $event.stopPropagation();
   }
 }

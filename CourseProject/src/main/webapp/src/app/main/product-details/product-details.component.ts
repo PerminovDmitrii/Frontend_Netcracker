@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { BasketService } from 'src/state/basket/basket.service';
 import { Product } from 'src/state/product.model';
 import { ProductsQuery } from 'src/state/products/products.query';
+import { MainService } from '../main.service';
 
 @Component({
   selector: 'app-product-details',
@@ -15,7 +15,7 @@ export class ProductDetailsComponent {
 
   product: Product | undefined;
 
-  constructor(private activatedRoute: ActivatedRoute, private productsQuery: ProductsQuery, private basketService: BasketService) {
+  constructor(private activatedRoute: ActivatedRoute, private productsQuery: ProductsQuery, private basketService: BasketService, private mainService: MainService) {
     this.product = productsQuery.getProduct(this.activatedRoute.snapshot.params['param']);
   }
 
@@ -27,7 +27,7 @@ export class ProductDetailsComponent {
     if (this.product) {
       this.basketService.addProduct(this.product);
       this.basketService.updateBasketEmpty(false);
-      this.basketService.updateTotalPrice(this.product.price);
+      this.mainService.updateTotalPrice(this.product.price);
     }
   }
 }

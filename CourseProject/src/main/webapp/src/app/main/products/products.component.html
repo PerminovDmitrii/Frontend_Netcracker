@@ -20,9 +20,9 @@
         <div class="search">
             <input type="text" class="filter-input" placeholder="   Search" [(ngModel)]="filterValue" (change)="filterProductsByName()">
             <img src="/assets/search.png">
-        </div> 
+        </div>
     </div>
-    <div class="actual-filter"></div> 
+    <div class="actual-filter"></div>
     <div class="actual-products">
         <app-quick-view class="quick-view-product" *ngFor = "let product of products$ | async; let i = index; trackBy: mainService.trackByFn"
         [product]="product" [routerLink]="['/productdetails/', product.id]" routerLinkActive="router-link-active"></app-quick-view>

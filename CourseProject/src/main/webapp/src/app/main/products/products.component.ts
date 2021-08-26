@@ -5,6 +5,7 @@ import { Product, PRODUCTS_TYPES } from 'src/state/product.model';
 import { ProductsQuery } from 'src/state/products/products.query';
 import { ProductsStoreService } from 'src/state/products/products.store.service';
 import { MainService } from '../main.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -19,7 +20,7 @@ export class ProductsComponent {
   public filterValue: string = '';
 
   constructor(private activatedRoute: ActivatedRoute, private productsStoreService: ProductsStoreService,
-    private productsQuery: ProductsQuery, public mainService: MainService) {
+    private productsQuery: ProductsQuery, public mainService: MainService, private router: Router) {
     // this.productsStoreService.updateProductsType(this.activatedRoute.snapshot.params['param']);
     const currentURLParam = activatedRoute.snapshot.params['param'];
     if (this.productsQuery.getValue().productType === '' && currentURLParam in PRODUCTS_TYPES) {
@@ -30,7 +31,7 @@ export class ProductsComponent {
     this.productType$ = this.productsQuery.productsType$;
     this.products$ = this.productsQuery.allProducts$;
   }
-
+  
   filterProductsByName(): void {
 
   }

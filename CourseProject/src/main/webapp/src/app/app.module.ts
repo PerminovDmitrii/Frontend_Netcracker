@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { ProductsStoreService } from 'src/state/products/products.store.service';
@@ -12,7 +13,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { HeaderService } from './header/header.service';
 import { MainModule } from './main/main.module';
-import { HashLocationStrategy, LocationStrategy } from "@angular/common";
+
 
 @NgModule({
   declarations: [

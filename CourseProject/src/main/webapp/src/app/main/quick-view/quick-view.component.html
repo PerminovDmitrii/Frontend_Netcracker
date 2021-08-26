@@ -1,11 +1,11 @@
 <div class="product">
     <div class="info">
-        <img class="" src={{product.img}} alt="product-img">
+        <img src={{product.img}} alt="product-img">
         <a class="name">{{product.name}}</a>
         <a class="config">{{product.config}}</a>
     </div>
     <div class="price">
         <a>{{product.price}} RUB</a>
-        <img src="/assets/addToCart.png" alt="Add to cart" (click)="addToCart()">
+        <img src="/assets/addToCart.png" alt="Add to cart" (click)="addToCart($event)">
     </div>
 </div>

@@ -11,7 +11,7 @@ export class BasketQuery extends QueryEntity<BasketState, Product> {
     allProducts$ = this.selectAll();
     basketCount = this.getCount();
     isBasketEmpty$ = this.select(state => state.isBasketEmpty);
-    totalPrice = getValue(this.store, 'totalPrice');
+    totalPrice: number = getValue(this.store, 'totalPrice');
     totalPrice$ = this.select(state => state.totalPrice);
 
     constructor(protected store: BasketStore) {
