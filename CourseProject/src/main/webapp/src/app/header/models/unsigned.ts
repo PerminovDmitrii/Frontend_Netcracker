@@ -9,7 +9,7 @@ export const unsigned: DropDownMenuItem[] = [
 
     {
         id: 2,
-        text: 'Registartion',
+        text: 'Registration',
         path: 'register'
     },
 ];

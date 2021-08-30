@@ -1,0 +1,31 @@
+  <ul class="submenu" *ngFor = "let menuItem of menuItems; let i = index; trackBy: headerService.trackByFn" ngSwitch="this.type">
+    <ng-template ngSwitchCase="catalog">
+      <li class="dropdown-element" (click)="this.menuService.setProductsType(menuItem.path)"><a routerLink={{menuItem.path}}>{{menuItem.text}}</a></li>
+    </ng-template>
+    <ng-template ngSwitchCase="account">
+      <li class="dropdown-element"><a routerLink={{menuItem.path}}>{{menuItem.text}}</a></li>
+    </ng-template>
+    <ng-template ngSwitchCase="sorting">
+      <li class="dropdown-element"><a (click)="sortBy(menuItem.text)">{{menuItem.text}}</a> <div class="arrow-up"></div></li>
+      <li class="dropdown-element"><a (click)="sortBy(menuItem.text)">{{menuItem.text}}</a> <div class="arrow-down"></div></li>
+    </ng-template>
+    <ng-template ngSwitchCase="filter">
+      <li class="dropdown-element"><a>{{menuItem.text}}</a>
+        <ng-container *ngIf="isTitleClicked">
+          <div *ngIf="menuItem.text === 'price' else brand">
+            <input type="text" class="price-input" [(ngModel)]="minPrice" placeholder="Minimum price"> -
+            <input type="text" class="price-input" [(ngModel)]="maxPrice" placeholder="Maximum price">
+          </div>
+        </ng-container>
+      </li>
+    </ng-template>
+  </ul>
+
+  <ng-template #brand>
+    <ul *ngFor="let brand of brands$ | async; let i = index; trackBy: headerService.trackByFn">
+      <li>
+        <span>{{brand}}</span>
+        <input type="checkbox" class="" (change)="filterByBrand(brand.brand)">
+      </li>
+    </ul>
+  </ng-template>

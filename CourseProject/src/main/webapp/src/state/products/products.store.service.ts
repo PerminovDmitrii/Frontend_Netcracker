@@ -4,7 +4,7 @@ import { accessories } from 'src/assets/data/accessories';
 import { phones } from 'src/assets/data/phones';
 import { tablets } from 'src/assets/data/tablets';
 import { Product } from '../product.model';
-import { ProductsStore } from './products.store';
+import { Brand, ProductsStore } from './products.store';
 
 @Injectable({ providedIn: 'root' })
 export class ProductsStoreService {
@@ -39,12 +39,21 @@ export class ProductsStoreService {
     this.productsStore.update({productsBrands: this.getBrands(products)});
   }
 
-  getBrands(products: Product[]): Array<String> {
-    const brands: Array<String> = [];
+  getBrands(products: Product[]): Array<Brand> {
+    const brands: Array<string> = [];
     products.map( product => {
       brands.push(product.brand);
     });
     const setOfBrands = new Set(brands);
-    return Array.from(setOfBrands);
+    const brandsArray: Array<Brand> = [];
+    let count: number = 1;
+    for (const value of setOfBrands) {
+      brandsArray.push({
+        id: count,
+        brand: value,
+      });
+      count++;
+    }
+    return brandsArray;
   }
 }
